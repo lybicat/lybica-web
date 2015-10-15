@@ -1,0 +1,34 @@
+{
+  "name": "lybica-web",
+  "version": "1.0.0",
+  "description": "Web UI for lybica",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "html": "node_modules/.bin/html-minifier --collapse-whitespace src/index.html -o dist/index.html",
+    "css": "node_modules/.bin/stylus --include ./node_modules --include-css --compress src/css/main.styl -o dist/css/style.css",
+    "js": "node_modules/.bin/browserify src/js/main.js | node_modules/.bin/uglifyjs > dist/js/bundle.js",
+    "fonts": "node_modules/.bin/fontify",
+    "build": "npm run html & npm run css & npm run js & npm run fonts",
+    "watch-html": "node_modules/.bin/nodemon --ext html --watch src --exec 'npm run html'",
+    "watch-css": "node_modules/.bin/nodemon --ext styl --watch src/css --exec 'npm run css'",
+    "watch-js": "node_modules/.bin/nodemon --ext js --watch src/js --exec 'npm run js'",
+    "watch": "npm run watch-html & npm run watch-css & npm run watch-js",
+    "server": "npm run watch & node_modules/.bin/live-server --port=3000 dist"
+  },
+  "author": "Zhang Yu",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^11.2.0",
+    "fontify": "0.0.2",
+    "html-minifier": "^0.8.0",
+    "live-server": "^0.8.1",
+    "nodemon": "^1.7.1",
+    "stylus": "^0.52.4",
+    "uglify-js": "^2.5.0"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.5",
+    "jquery": "^2.1.4"
+  }
+}
