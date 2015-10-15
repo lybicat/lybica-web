@@ -6,14 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "html": "node_modules/.bin/html-minifier --collapse-whitespace src/index.html -o dist/index.html",
-    "css": "node_modules/.bin/stylus --include ./node_modules --include-css --compress src/css/main.styl -o dist/css/style.css",
-    "js": "node_modules/.bin/browserify src/js/main.js | node_modules/.bin/uglifyjs > dist/js/bundle.js",
+    "css": "node_modules/.bin/stylus --include ./node_modules --include-css --compress src/css/main.styl -o dist/css/main.css",
+    "js": "node_modules/.bin/browserify src/js/main.js | node_modules/.bin/uglifyjs > dist/js/main.js",
     "fonts": "node_modules/.bin/fontify",
     "build": "npm run html & npm run css & npm run js & npm run fonts",
     "watch-html": "node_modules/.bin/nodemon --ext html --watch src --exec 'npm run html'",
     "watch-css": "node_modules/.bin/nodemon --ext styl --watch src/css --exec 'npm run css'",
     "watch-js": "node_modules/.bin/nodemon --ext js --watch src/js --exec 'npm run js'",
-    "watch": "npm run watch-html & npm run watch-css & npm run watch-js",
+    "watch-fonts": "node_modules/.bin/nodemon --watch fontify.json --exec 'npm run fonts'",
+    "watch": "npm run watch-html & npm run watch-css & npm run watch-js & npm run watch-fonts",
     "server": "npm run watch & node_modules/.bin/live-server --port=3000 dist"
   },
   "author": "Zhang Yu",
@@ -29,6 +30,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.5",
+    "font-awesome": "^4.4.0",
     "jquery": "^2.1.4"
   }
 }

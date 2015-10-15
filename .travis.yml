@@ -1,0 +1,21 @@
+stages:
+    - build
+    - test
+    - deploy
+
+build:
+    script:
+        - npm install
+        - npm run build
+
+atest:
+    stage: test
+    script:
+        - echo "start to do test ..."
+
+
+production:
+    stage: deploy
+    script:
+        - echo "start to deploy ..."
+

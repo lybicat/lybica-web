@@ -1,6 +1,6 @@
 {
   "modules": [
-    "bootstrap"
+    "font-awesome"
   ],
   "dest": "dist"
 }
