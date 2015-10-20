@@ -25,30 +25,30 @@ TaskQueue.prototype.render = function() {
         plan: 'CRT SISO',
         device: 'TL1501',
         triggerby: 'QT1',
-        triggerat: '3hours ago'}, {
-        status: 'pending',
-        build: 'TL15A_123414_23444',
-        plan: 'CRT SISO',
-        device: 'TL1501',
-        triggerby: 'QT1',
-        triggerat: '3hours ago'}];
+        triggerat: '3hours ago'},
+        {status: 'running',
+        build: 'TL15A_123412_23422',
+        plan: 'CRT RRM',
+        device: 'TL1509',
+        triggerby: 'QT2',
+        triggerat: '1hour ago'},
+        {status: 'running',
+        build: 'TL15A_123412_23422',
+        plan: 'CRT TRM',
+        device: 'TL1510',
+        triggerby: 'QT2',
+        triggerat: '1hour ago'}];
+    var tableRows = data.map(function(d) {
+        return '<tr>' +
+          '  <td><span class="ci-status ci-' + d.status + '">' + '<i class="fa ' + (d.status === 'pending' && 'fa-clock-o' || 'fa-refresh') + '"></i>' + d.status + '</span></td>' +
+          '  <td><a class="ci-build" href="">' + d.build + '</a></td>' +
+          '  <td><a class="ci-plan">' + d.plan + '</a></td>' +
+          '  <td><a class="ci-device">' + d.device + '</a></td>' +
+          '  <td><a class="ci-trigger">' + d.triggerby + '</a></td>' +
+          '  <td><a class="ci-time">' + d.triggerat + '</a></td>' +
+          '</tr>';
+    }).join('');
 
-    var tableRows = '<tr>' +
-      '  <td><span class="ci-status ci-pending"><i class="fa fa-clock-o"></i>pending</span></td>' +
-      '  <td><a class="ci-build" href="">TL15A_123414_23444</a></td>' +
-      '  <td><a class="ci-plan">CRT SISO</a></td>' +
-      '  <td><a class="ci-device">TL1501</a></td>' +
-      '  <td><a class="ci-trigger">QT1</a></td>' +
-      '  <td><a class="ci-time">3hours ago</a></td>' +
-      '</tr>' +
-      '<tr>' +
-      '  <td><span class="ci-status ci-running"><i class="fa fa-refresh"></i>running</span></td>' +
-      '  <td><a class="ci-build" href="">TL15A_123414_23443</a></td>' +
-      '  <td><a class="ci-plan">CRT OAM</a></td>' +
-      '  <td><a class="ci-device">TL1504</a></td>' +
-      '  <td><a class="ci-trigger">QT2</a></td>' +
-      '  <td><a class="ci-time">4hours ago</a></td>' +
-      '</tr>';
     self._container.empty().append(tableHead + tableRows + tableFoot);
 }
 
