@@ -29,7 +29,7 @@ TestPlan.prototype.render = function() {
     var tableRows = data.map(function(d) {
         return '<tr>' +
           '  <td><a class="plan-name">' + d.name + '</a></td>' +
-          '  <td><a class="plan-case">' + d.caseset + '</a></td>' +
+          '  <td><a class="plan-case">' + d.caseset + '<span class="badge">5</span></a></td>' +
           '  <td><a class="plan-env">' + d.device + '</a></td>' +
           '  <td><a class="plan-action"><i class="fa fa-pencil-square-o"></i></a></td>' +
           '</tr>';

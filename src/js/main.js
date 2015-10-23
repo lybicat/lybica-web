@@ -8,6 +8,7 @@ var TestPlanner = require('./testplan');
 var ResourceManager = require('./resourcemgr');
 var TestScheduler = require('./testschedule');
 var TestReporter = require('./testreport');
+var Dashboard = require('./dashboard');
 
 $(document).ready(function() {
     // binding events
@@ -27,6 +28,8 @@ $(document).ready(function() {
         return (new TestReporter('#content-wrapper')).render();
     });
 
+    // show dashboard
+    (new Dashboard('#dashboard-wrapper')).render();
     // show ongoing tasks defaultly
-    return (new TaskQueue('#content-wrapper')).render();
+    (new TaskQueue('#content-wrapper')).render();
 });
