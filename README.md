@@ -27,3 +27,10 @@
 * Folder `dist` is used in deployment, it contains all the compiled and minified sources of html, javascript and css
 * `fontify.json` specify the fonts packages used
 * `.travis.yml` is the configuration for the Travis-CI
+
+## Run the project locally
+
+1. Clone the project from github.
+1. Execute `npm install` to install all dependencies.
+1. Execute `npm run server` to view the web site on the browser.
+
