@@ -15,7 +15,7 @@
     "watch-js": "node_modules/.bin/nodemon --ext js --watch src/js --exec 'npm run js'",
     "watch-fonts": "node_modules/.bin/nodemon --watch fontify.json --exec 'npm run fonts'",
     "watch": "npm run watch-html & npm run watch-css & npm run watch-js & npm run watch-fonts",
-    "server": "npm run watch & node_modules/.bin/live-server --port=3000 dist"
+    "start": "npm run watch & node_modules/.bin/live-server --port=3000 dist"
   },
   "author": "Zhang Yu",
   "license": "MIT",

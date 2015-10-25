@@ -1,15 +1,14 @@
-var $ = require('jquery');
 var d3 = require('d3');
 
 function TestReporter(container) {
-    this._container = $(container);
+    this._container = container;
 }
 
 
 TestReporter.prototype.render = function() {
     var self = this;
 
-    self._container.empty().append();
+    d3.select(self._container);
 }
 
 module.exports = TestReporter;
