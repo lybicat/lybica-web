@@ -23,6 +23,7 @@
     "browserify": "^11.2.0",
     "fontify": "0.0.2",
     "html-minifier": "^0.8.0",
+    "jade": "^1.11.0",
     "live-server": "^0.8.1",
     "nodemon": "^1.7.1",
     "stylus": "^0.52.4",
