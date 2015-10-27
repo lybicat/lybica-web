@@ -22,6 +22,8 @@
   "devDependencies": {
     "browserify": "^11.2.0",
     "fontify": "0.0.2",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jade": "^0.15.0",
     "html-minifier": "^0.8.0",
     "jade": "^1.11.0",
     "live-server": "^0.8.1",
