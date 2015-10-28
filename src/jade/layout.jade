@@ -1,0 +1,55 @@
+doctype html
+html
+    head
+        block title
+            title Lybica
+        meta(charset="utf-8")
+        link(rel="stylesheet", href="css/main.css")
+    body
+        nav(class="navbar navbar-default navbar-fixed-top", role="banner")
+            div(class="container-fluid")
+                div(class="navbar-header")
+                    a(href="/", class="navbar-brand")
+                        i(class="fa fa-home")
+                        | Lybica
+                        sup beta
+                nav(class="collapse navbar-collapse", role="navigation")
+                    ul(class="nav navbar-nav")
+                        li
+                            a(href="javascript:void(0)")#testPlanLink
+                                i(class="fa fa-map-o")
+                                | Test Plan
+                        li
+                            a(href="javascript:void(0)")#resourceMgrLink
+                                i(class="fa fa-laptop")
+                                | Resource Manager
+                        li
+                            a(href="javascript:void(0)")#testSchedulerLink
+                                i(class="fa fa-calendar-check-o")
+                                | Test Scheduler
+                        li
+                            a(href="javascript:void(0)")#testReportLink
+                                i(class="fa fa-area-chart")
+                                | Test Report
+                        li
+                            a(href="javascript:void(0)")#swBuildLink
+                                i(class="fa fa-diamond")
+                                | SW Build
+                        li
+                            a(href="javascript:void(0)")#testAgentLink
+                                i(class="fa fa-server")
+                                | Test Agent
+                    div(class="navbar-form navbar-right")#loginForm
+                        span(class="text-danger")#loginError
+                        input(type="text", class="form-control", placeholder="NSN account")#loginUser
+                        input(type="password", class="form-control", placeholder="password")#loginPasswd
+                        button(class="btn btn-sm btn-default" data-loading-text="<i class='fa fa-spinner fa-pulse fa-large'></i>")#loginBtn Sign In
+        div(class="container-fluid")#content
+            div(class="row")
+                div(class="col-sm-3")
+                    div(class="sidebar-nav")
+                        div(class="sidebar-nav navbar navbar-default", role="navigation")
+                            div(class="navbar-collapse collapse sidebar-navbar-collapse")#dashboard-wrapper
+                div(class="col-sm-9")#content-wrapper
+    block script
+        script(src="js/main.js")
