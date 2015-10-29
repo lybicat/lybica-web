@@ -16,40 +16,66 @@ html
                 nav(class="collapse navbar-collapse", role="navigation")
                     ul(class="nav navbar-nav")
                         li
-                            a(href="javascript:void(0)")#testPlanLink
+                            a(href="/testplan.html")#testPlanLink
                                 i(class="fa fa-map-o")
                                 | Test Plan
                         li
-                            a(href="javascript:void(0)")#resourceMgrLink
+                            a(href="/resourcemgr.html")#resourceMgrLink
                                 i(class="fa fa-laptop")
                                 | Resource Manager
                         li
-                            a(href="javascript:void(0)")#testSchedulerLink
+                            a(href="/testscheduler.html")#testSchedulerLink
                                 i(class="fa fa-calendar-check-o")
                                 | Test Scheduler
                         li
-                            a(href="javascript:void(0)")#testReportLink
+                            a(href="/testreport.html")#testReportLink
                                 i(class="fa fa-area-chart")
                                 | Test Report
                         li
-                            a(href="javascript:void(0)")#swBuildLink
+                            a(href="/swbuild.html")#swBuildLink
                                 i(class="fa fa-diamond")
                                 | SW Build
                         li
-                            a(href="javascript:void(0)")#testAgentLink
+                            a(href="/testagent.html")#testAgentLink
                                 i(class="fa fa-server")
                                 | Test Agent
                     div(class="navbar-form navbar-right")#loginForm
                         span(class="text-danger")#loginError
                         input(type="text", class="form-control", placeholder="NSN account")#loginUser
                         input(type="password", class="form-control", placeholder="password")#loginPasswd
-                        button(class="btn btn-sm btn-default" data-loading-text="<i class='fa fa-spinner fa-pulse fa-large'></i>")#loginBtn Sign In
-        div(class="container-fluid")#content
+                        button(class="btn btn-sm btn-default", data-loading-text="<i class='fa fa-spinner fa-pulse fa-large'></i>")#loginBtn Sign In
+        div(class="container-fluid")
             div(class="row")
                 div(class="col-sm-3")
                     div(class="sidebar-nav")
                         div(class="sidebar-nav navbar navbar-default", role="navigation")
-                            div(class="navbar-collapse collapse sidebar-navbar-collapse")#dashboard-wrapper
+                            div(class="navbar-collapse collapse sidebar-navbar-collapse")
+                                ul(class="nav navbar-nav")
+                                    li
+                                        a(href="javascript:void(0)")#testingBuildLink Testing Build: TL15A_123414_23443_1234
+                                        div(class="progress progress-striped")
+                                            div(class="progress-bar progress-bar-success", style="width: 40%")
+                                                div(class="sr-only") PASS (40%)
+                                            div(class="progress-bar progress-bar-danger", style="width: 15%")
+                                                div(class="sr-only") FAILED (15%)
+                                    li
+                                        a(href="javascript:void(0)")#lastDoneBuildLink Last Finished Build: TL15A_123414_23422_1234
+                                        div(class="progress progress-striped")
+                                            div(class="progress-bar progress-bar-success", style="width: 60%")
+                                                div(class="sr-only") PASS (60%)
+                                            div(class="progress-bar progress-bar-danger", style="width: 45%")
+                                                div(class="sr-only") FAILED (45%)
+                                    li
+                                        a(href="javascript:void(0)")#runningTasksLink
+                                            | Running Tasks
+                                            span(class="badge")#runningTaskCount 32
+                                        a(href="javascript:void(0)")#pendingTasksLink
+                                            | Pending Tasks
+                                            span(class="badge")#pendingTaskCount 5
+                                        a(href="javascript:void(0)")#idleDevicesLink
+                                            | Idle Devices
+                                            span(class="badge")#idleDevicesCount 112
                 div(class="col-sm-9")#content-wrapper
+                    block content
     block script
-        script(src="js/main.js")
+        script(src="js/taskqueue.js")

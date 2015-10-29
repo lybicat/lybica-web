@@ -1,0 +1,22 @@
+extends ./layout.jade
+
+block title
+    title Lybica Test Plan
+
+block content
+    div(class="testplan")
+        table(class="table table-hover")
+            thead
+                tr
+                    th Plan Name
+                    th Case Set
+                    th Test Env
+                    th #
+            tbody
+        div
+            button(type="submit", class="btn btn-success")
+                i(class="fa fa-plus-square-o")
+                | New Plan
+
+block script
+    script(src="js/testplan.js")
