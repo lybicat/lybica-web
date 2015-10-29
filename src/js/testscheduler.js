@@ -1,5 +1,3 @@
-// see https://github.com/Serhioromano/bootstrap-calendar
-// demo http://bootstrap-calendar.azurewebsites.net/
 var $ = require('jquery');
 require('fullcalendar');
 
@@ -18,11 +16,6 @@ var TestScheduler = {
                 {
                     title: 'All Day Event',
                     start: '2015-02-01'
-                },
-                {
-                    title: 'Long Event',
-                    start: '2015-02-07',
-                    end: '2015-02-10'
                 },
                 {
                     id: 999,
@@ -59,10 +52,6 @@ var TestScheduler = {
                 {
                     title: 'Dinner',
                     start: '2015-02-12T20:00:00'
-                },
-                {
-                    title: 'Birthday Party',
-                    start: '2015-02-13T07:00:00'
                 },
                 {
                     title: 'Click for Google',
