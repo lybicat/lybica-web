@@ -1,7 +1,9 @@
 'use strict';
 
 var $ = require('jquery');
+global.jQuery = global.$ = $;
 require('fullcalendar');
+var BootstrapDialog = require('bootstrap-dialog');
 
 var TestScheduler = {
     render: function(container) {
@@ -10,7 +12,9 @@ var TestScheduler = {
                 newSchedule: {
                     text: 'New Schedule',
                     click: function() {
-                        alert('Create new schedule here.');
+                        BootstrapDialog.show({
+                            message: 'Create new schedule here.'
+                        });
                     }
                 }
             },
@@ -22,23 +26,9 @@ var TestScheduler = {
             defaultDate: '2015-02-12',
             defaultView: 'agendaWeek',
             contentHeight: 'auto',
-            selectable: true,
-            selectHelper: true,
-            select: function(start, end) {
-                var title = prompt('Event Title:');
-                var eventData;
-                if (title) {
-                    eventData = {
-                        title: title,
-                        start: start,
-                        end: end
-                    };
-                    $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                }
-                $('#calendar').fullCalendar('unselect');
-            },
-            editable: true,
             eventLimit: true, // allow "more" link when too many events
+            eventStartEditable: true,
+            eventDurationEditable: false,
             events: [
                 {
                     id: 999,
