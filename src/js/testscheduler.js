@@ -1,22 +1,45 @@
+'use strict';
+
 var $ = require('jquery');
 require('fullcalendar');
 
 var TestScheduler = {
     render: function(container) {
         $(container).fullCalendar({
+            customButtons: {
+                newSchedule: {
+                    text: 'New Schedule',
+                    click: function() {
+                        alert('Create new schedule here.');
+                    }
+                }
+            },
             header: {
-                left: 'prev,next today',
+                left: 'newSchedule',
                 center: 'title',
-                right: 'month,agendaWeek,agendaDay'
+                right: 'prev,today,next'
             },
             defaultDate: '2015-02-12',
+            defaultView: 'agendaWeek',
+            contentHeight: 'auto',
+            selectable: true,
+            selectHelper: true,
+            select: function(start, end) {
+                var title = prompt('Event Title:');
+                var eventData;
+                if (title) {
+                    eventData = {
+                        title: title,
+                        start: start,
+                        end: end
+                    };
+                    $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                }
+                $('#calendar').fullCalendar('unselect');
+            },
             editable: true,
             eventLimit: true, // allow "more" link when too many events
             events: [
-                {
-                    title: 'All Day Event',
-                    start: '2015-02-01'
-                },
                 {
                     id: 999,
                     title: 'Repeating Event',
@@ -26,11 +49,6 @@ var TestScheduler = {
                     id: 999,
                     title: 'Repeating Event',
                     start: '2015-02-16T16:00:00'
-                },
-                {
-                    title: 'Conference',
-                    start: '2015-02-11',
-                    end: '2015-02-13'
                 },
                 {
                     title: 'Meeting',
@@ -52,6 +70,10 @@ var TestScheduler = {
                 {
                     title: 'Dinner',
                     start: '2015-02-12T20:00:00'
+                },
+                {
+                    title: 'Birthday Party',
+                    start: '2015-02-13T07:00:00'
                 },
                 {
                     title: 'Click for Google',

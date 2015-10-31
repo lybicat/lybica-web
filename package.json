@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "html": "grunt jade & cp -rp src/ext dist",
+    "html": "grunt jade",
     "css": "node_modules/.bin/stylus --include ./node_modules --include-css --compress src/css/main.styl -o dist/css/main.css",
     "js": "grunt browserify && grunt uglify",
     "fonts": "node_modules/.bin/fontify",
