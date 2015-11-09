@@ -1,23 +1,23 @@
 extends ./layout.jade
 
 block title
-    title Lybica Resource Manager
+  title Lybica Resource Manager
 
 block content
-    table(class="table table-hover")
-        thead
-            tr
-                th Status
-                th Name
-                th IP Addr.
-                th Build Version
-                th Tags
-                th #
-        tbody
-    div
-        button(type="submit", class="btn btn-success")
-            i(class="fa fa-plus-square-o")
-            | New Device
+  table(class="table table-hover")
+    thead
+      tr
+        th Status
+        th Name
+        th IP Addr.
+        th Build Version
+        th Tags
+        th #
+    tbody
+  div
+    button(type="submit", class="btn btn-success")
+      i(class="fa fa-plus-square-o")
+      | New Device
 
 block script
-    script(src="js/resourcemgr.js")
+  script(src="js/resourcemgr.js")

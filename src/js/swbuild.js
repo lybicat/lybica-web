@@ -1,10 +1,8 @@
-'use strict';
-
 var $ = require('jquery');
 
 var SwBuild = {
-    render: function() {
-    }
+  render: function() {
+  }
 };
 
 SwBuild.render();

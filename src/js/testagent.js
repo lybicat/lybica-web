@@ -1,10 +1,8 @@
-'use strict';
-
 var $ = require('jquery');
 
 var TestAgent = {
-    render: function() {
-    }
+  render: function() {
+  }
 };
 
 
