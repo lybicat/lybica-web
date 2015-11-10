@@ -28,7 +28,7 @@ var TaskQueue = {
                '  <td><a class="ci-device">' + d.device.join(';') + '</a></td>' +
                '  <td><a class="ci-trigger">' + d.triggerby + '</a></td>' +
                '  <td><a class="ci-time">' + moment(d.triggerat).fromNow() + '</a></td>' +
-               '  <td><a class="ci-more"><i class="fa fa-external-link"></i></a></td>' +
+               '  <td><a class="ci-more">' + (d.started ? '<i class="fa fa-external-link"></i>' : '') + '</a></td>' +
                '</tr>';
       }).join('');
 
