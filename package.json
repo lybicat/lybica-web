@@ -38,6 +38,7 @@
     "d3": "^3.5.6",
     "font-awesome": "^4.4.0",
     "fullcalendar": "^2.4.0",
-    "jquery": "^2.1.4"
+    "jquery": "^2.1.4",
+    "moment": "^2.10.6"
   }
 }

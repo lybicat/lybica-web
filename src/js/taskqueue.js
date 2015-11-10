@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var moment = require('moment');
 
 var TaskQueue = {
   render: function(container, showDoneTasks) {
@@ -26,7 +27,7 @@ var TaskQueue = {
                '  <td><a class="ci-plan">' + (d.plan || 'PILOT') + '</a></td>' +
                '  <td><a class="ci-device">' + d.device.join(';') + '</a></td>' +
                '  <td><a class="ci-trigger">' + d.triggerby + '</a></td>' +
-               '  <td><a class="ci-time">' + d.triggerat + '</a></td>' +
+               '  <td><a class="ci-time">' + moment(d.triggerat).fromNow() + '</a></td>' +
                '  <td><a class="ci-more"><i class="fa fa-external-link"></i></a></td>' +
                '</tr>';
       }).join('');
