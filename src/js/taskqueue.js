@@ -1,12 +1,27 @@
 var $ = require('jquery');
 
 var TaskQueue = {
-  render: function(container) {
-    $.getJSON('/api/tasks', function(data) {
+  render: function(container, showDoneTasks) {
+    function getStatusTxt(d) {
+      if (d.started === false) return 'pending';
+      if (d.done) return d.passed ? 'passed' : 'failed';
+      return 'running';
+    }
+
+    var statusIcon = {
+      passed: '<i class="fa fa-check"></i>',
+      failed: '<i class="fa fa-close"></i>',
+      pending: '<i class="fa fa-clock-o"></i>',
+      running: '<i class="fa fa-refresh"></i>'
+    };
+
+    var apiUrl = showDoneTasks === true ? '/api/tasks/done' : '/api/tasks';
+
+    $.getJSON(apiUrl, function(data) {
       var tableRows = data.map(function(d) {
-        var statusTxt = d.started && 'running' || 'pending';
+        var statusTxt = getStatusTxt(d);
         return '<tr>' +
-               '  <td><span class="ci-status ci-' + statusTxt + '">' + '<i class="fa ' + (d.started && 'fa-refresh' || 'fa-clock-o') + '"></i>' + statusTxt + '</span></td>' +
+               '  <td><span class="ci-status ci-' + statusTxt + '">' + statusIcon[statusTxt] + statusTxt + '</span></td>' +
                '  <td><a class="ci-build" href="">' + d.build + '</a></td>' +
                '  <td><a class="ci-plan">' + (d.plan || 'PILOT') + '</a></td>' +
                '  <td><a class="ci-device">' + d.device.join(';') + '</a></td>' +
@@ -16,10 +31,23 @@ var TaskQueue = {
                '</tr>';
       }).join('');
 
-      $(container).append(tableRows);
+      $(container).empty().append(tableRows);
     });
   }
 };
 
+// button event binding
+$('#activeTasksBtn').click(function() {
+  $(this).addClass('active');
+  $('#doneTasksBtn').removeClass('active');
+  TaskQueue.render('#content-wrapper>table>tbody');
+});
 
+$('#doneTasksBtn').click(function() {
+  $(this).addClass('active');
+  $('#activeTasksBtn').removeClass('active');
+  TaskQueue.render('#content-wrapper>table>tbody', true);
+});
+
+// show the active tasks defaultly
 TaskQueue.render('#content-wrapper>table>tbody');
