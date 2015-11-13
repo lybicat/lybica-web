@@ -4,19 +4,23 @@ block title
   title Lybica Test Plan
 
 block content
-  div(class="testplan")
-    table(class="table table-hover")
-      thead
-        tr
-          th Plan Name
-          th Case Set
-          th Test Env
-          th #
-      tbody
-    div
-      button(type="submit", class="btn btn-success")
-        i(class="fa fa-plus-square-o")
-        | New Plan
+  div(class="row")
+    div(class="col-md-4 col-md-offset-8")
+      - var searchInputId = "planSearchInput"
+      - var searchInputPlaceHolder = "ID, Plan Name, Plan Tag ..."
+      include ./includes/searchinput.jade
+  table(class="table table-hover")
+    thead
+      tr
+        th Plan Name
+        th Case Set
+        th Test Env
+        th #
+    tbody
+  div
+    button(type="submit", class="btn btn-success")
+      i(class="fa fa-plus-square-o")
+      | New Plan
 
 block script
   script(src="js/testplan.js")

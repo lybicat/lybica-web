@@ -22,4 +22,4 @@ var TestPlan = {
   }
 };
 
-TestPlan.render('div.testplan>table>tbody');
+TestPlan.render('#content-wrapper>table>tbody');
