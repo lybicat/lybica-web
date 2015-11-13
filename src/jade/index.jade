@@ -9,12 +9,9 @@ block content
       button(class="btn btn-default active", href="javascript:void(0)")#activeTasksBtn Active
       button(class="btn btn-default", href="javascript:void(0)")#doneTasksBtn Done
     div(class="col-md-4")
-      div#taskSearchInput
-        div(class="input-group col-md-12")
-          input(type="text", class="form-control search-input", placeholder="ID, Plan Name ...")
-          span(class="input-group-btn")
-            button(class="btn btn-info")
-              i(class="fa fa-search")
+      - var searchInputId = "taskSearchInput"
+      - var searchInputPlaceHolder = "ID, Plan Name ..."
+      include ./includes/searchinput.jade
   table(class="table table-hover")
     thead
       tr
