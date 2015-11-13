@@ -5,7 +5,11 @@ block title
 
 block content
   div(class="row")
-    div(class="col-md-4 col-md-offset-8")
+    div(class="col-md-8")
+      button(type="submit", class="btn btn-success")
+        i(class="fa fa-plus-square-o")
+        | New Plan
+    div(class="col-md-4")
       - var searchInputId = "planSearchInput"
       - var searchInputPlaceHolder = "ID, Plan Name, Plan Tag ..."
       include ./includes/searchinput.jade
@@ -17,10 +21,6 @@ block content
         th Test Env
         th #
     tbody
-  div
-    button(type="submit", class="btn btn-success")
-      i(class="fa fa-plus-square-o")
-      | New Plan
 
 block script
   script(src="js/testplan.js")
