@@ -3,7 +3,7 @@ var moment = require('moment');
 
 var TaskQueue = {
   render: function(container, showDoneTasks) {
-    function getStatusTxt(d) {
+    function _getStatusTxt(d) {
       if (d.started === false) return 'pending';
       if (d.done) return d.passed ? 'passed' : 'failed';
       return 'running';
@@ -18,9 +18,17 @@ var TaskQueue = {
 
     var apiUrl = showDoneTasks === true ? '/api/tasks/done' : '/api/tasks';
 
+    function _getTaskLogLink(task) {
+      if (task.done)
+        return '<a class="ci-more" target="_blank" href="' + task.loglink + '"><i class="fa fa-external-link"></i></a>';
+      else if (task.started)
+        return '<a class="ci-more" target="_blank" href="' + task.consolelink + '"><i class="fa fa-external-link"></i></a>';
+      return '';
+    }
+
     $.getJSON(apiUrl, function(data) {
       var tableRows = data.map(function(d) {
-        var statusTxt = getStatusTxt(d);
+        var statusTxt = _getStatusTxt(d);
         return '<tr>' +
                '  <td><span class="ci-status ci-' + statusTxt + '">' + statusIcon[statusTxt] + statusTxt + '</span></td>' +
                '  <td><a class="ci-build" href="">' + d.build + '</a></td>' +
@@ -28,7 +36,7 @@ var TaskQueue = {
                '  <td><a class="ci-device">' + d.device.join(';') + '</a></td>' +
                '  <td><a class="ci-trigger">' + d.triggerby + '</a></td>' +
                '  <td><a class="ci-time">' + moment(d.triggerat).fromNow() + '</a></td>' +
-               '  <td><a class="ci-more">' + (d.started ? '<i class="fa fa-external-link"></i>' : '') + '</a></td>' +
+               '  <td>' + _getTaskLogLink(d) + '</td>' +
                '</tr>';
       }).join('');
 

@@ -4,7 +4,13 @@ block title
   title Lybica Test Agent
 
 block content
-  div#agentList
+  div.row
+    div.col-md-4(class="col-md-offset-8")
+      - var searchInputId = "agentSearchInput"
+      - var searchInputPlaceHolder = "Agent Name, IP or Labels ..."
+      include ./includes/searchinput.jade
+  - var columns = ["Status", "Name", "IP Addr.", "# of Runners", "Labels", "#"]
+  include ./includes/table.jade
 
 block script
   script(src="js/testagent.js")

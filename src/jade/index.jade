@@ -4,11 +4,11 @@ block title
   title Lybica Dashboard
 
 block content
-  div(class="row")
-    div(class="col-md-8")
+  div.row
+    div.col-md-8
       button(class="btn btn-default active", href="javascript:void(0)")#activeTasksBtn Active
       button(class="btn btn-default", href="javascript:void(0)")#doneTasksBtn Done
-    div(class="col-md-4")
+    div.col-md-4
       - var searchInputId = "taskSearchInput"
       - var searchInputPlaceHolder = "ID, Plan Name ..."
       include ./includes/searchinput.jade
