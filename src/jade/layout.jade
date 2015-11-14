@@ -7,9 +7,9 @@ html
     link(rel="stylesheet", href="css/main.css")
   body
     nav(class="navbar navbar-default navbar-fixed-top", role="banner")
-      div(class="container-fluid")
-        div(class="navbar-header")
-          a(href="/", class="navbar-brand")
+      div.container-fluid
+        div.navbar-header
+          a.navbar-brand(href="/")
             i(class="fa fa-home")
             | Lybica
             sup beta
@@ -39,26 +39,26 @@ html
               a(href="/testagent.html")#testAgentLink
                 i(class="fa fa-cloud")
                 | Test Agent
-    div(class="container-fluid")
-      div(class="row")
-        div(class="col-sm-3")
-          div(class="sidebar-nav")
+    div.container-fluid
+      div.row
+        div.col-sm-3
+          div.sidebar-nav
             div(class="sidebar-nav navbar navbar-default", role="navigation")
               div(class="navbar-collapse collapse sidebar-navbar-collapse")
                 ul(class="nav navbar-nav")
                   li
                     a(href="javascript:void(0)")#testingBuildLink Testing Build: TL15A_123414_23443_1234
-                    div(class="progress progress-striped")
-                      div(class="progress-bar progress-bar-success", style="width: 40%")
+                    div.progress(class="progress-striped")
+                      div.progress-bar(class="progress-bar-success", style="width: 40%")
                         div(class="sr-only") PASS (40%)
-                      div(class="progress-bar progress-bar-danger", style="width: 15%")
+                      div.progress-bar(class="progress-bar-danger", style="width: 15%")
                         div(class="sr-only") FAILED (15%)
                   li
                     a(href="javascript:void(0)")#lastDoneBuildLink Last Finished Build: TL15A_123414_23422_1234
-                    div(class="progress")
-                      div(class="progress-bar progress-bar-success", style="width: 60%")
+                    div.progress
+                      div.progress-bar(class="progress-bar-success", style="width: 60%")
                         div(class="sr-only") PASS (60%)
-                      div(class="progress-bar progress-bar-danger", style="width: 40%")
+                      div.progress-bar(class="progress-bar-danger", style="width: 40%")
                         div(class="sr-only") FAILED (40%)
                   li
                     a(href="javascript:void(0)")#runningTasksLink
@@ -70,7 +70,7 @@ html
                     a(href="javascript:void(0)")#idleDevicesLink
                       | Idle Devices
                       span(class="badge")#idleDevicesCount 112
-        div(class="col-sm-9")#content-wrapper
+        div.col-sm-9#content-wrapper
           block content
   block script
     script(src="js/taskqueue.js")
