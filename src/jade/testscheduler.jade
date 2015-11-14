@@ -4,7 +4,12 @@ block title
   title Lybica Test Scheduler
 
 block content
-  div(class="testscheduler")#testScheduleCalendar
+  div.row
+    div.col-md-4(class="col-md-offset-8")
+      - var searchInputId = "schedulerSearchInput"
+      - var searchInputPlaceHolder = "Build Name, Plan Name ..."
+      include ./includes/searchinput.jade
+  div.testscheduler#testScheduleCalendar
 
 block script
   script(src="js/testscheduler.js")
