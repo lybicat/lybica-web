@@ -1,3 +1,4 @@
+include ./includes/progressbar.jade
 doctype html
 html
   head
@@ -10,34 +11,34 @@ html
       div.container-fluid
         div.navbar-header
           a.navbar-brand(href="/")
-            i(class="fa fa-home")
+            i.fa(class="fa-home")
             | Lybica
             sup beta
         nav(class="collapse navbar-collapse", role="navigation")
           ul(class="nav navbar-nav")
             li
               a(href="/testplan.html")#testPlanLink
-                i(class="fa fa-tasks")
+                i.fa(class="fa-tasks")
                 | Test Plan
             li
               a(href="/resourcemgr.html")#resourceMgrLink
-                i(class="fa fa-laptop")
+                i.fa(class="fa-laptop")
                 | Resource Manager
             li
               a(href="/testscheduler.html")#testSchedulerLink
-                i(class="fa fa-calendar-check-o")
+                i.fa(class="fa-calendar-check-o")
                 | Test Scheduler
             li
               a(href="/testreport.html")#testReportLink
-                i(class="fa fa-area-chart")
+                i.fa(class="fa-area-chart")
                 | Test Report
             li
               a(href="/swbuild.html")#swBuildLink
-                i(class="fa fa-diamond")
+                i.fa(class="fa-diamond")
                 | SW Build
             li
               a(href="/testagent.html")#testAgentLink
-                i(class="fa fa-cloud")
+                i.fa(class="fa-cloud")
                 | Test Agent
     div.container-fluid
       div.row
@@ -48,28 +49,20 @@ html
                 ul(class="nav navbar-nav")
                   li
                     a(href="javascript:void(0)")#testingBuildLink Testing Build: TL15A_123414_23443_1234
-                    div.progress(class="progress-striped")
-                      div.progress-bar(class="progress-bar-success", style="width: 40%")
-                        div(class="sr-only") PASS (40%)
-                      div.progress-bar(class="progress-bar-danger", style="width: 15%")
-                        div(class="sr-only") FAILED (15%)
+                    +progressbar-striped(40, 15)
                   li
                     a(href="javascript:void(0)")#lastDoneBuildLink Last Finished Build: TL15A_123414_23422_1234
-                    div.progress
-                      div.progress-bar(class="progress-bar-success", style="width: 60%")
-                        div(class="sr-only") PASS (60%)
-                      div.progress-bar(class="progress-bar-danger", style="width: 40%")
-                        div(class="sr-only") FAILED (40%)
+                    +progressbar(60, 40)
                   li
                     a(href="javascript:void(0)")#runningTasksLink
                       | Running Tasks
-                      span(class="badge")#runningTaskCount 32
+                      span.badge#runningTaskCount 32
                     a(href="javascript:void(0)")#pendingTasksLink
                       | Pending Tasks
-                      span(class="badge")#pendingTaskCount 5
+                      span.badge#pendingTaskCount 5
                     a(href="javascript:void(0)")#idleDevicesLink
                       | Idle Devices
-                      span(class="badge")#idleDevicesCount 112
+                      span.badge#idleDevicesCount 112
         div.col-sm-9#content-wrapper
           block content
   block script

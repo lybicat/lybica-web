@@ -1,4 +1,6 @@
 extends ./layout.jade
+include ./includes/searchinput.jade
+include ./includes/table.jade
 
 block title
   title Lybica Test Plan
@@ -10,11 +12,8 @@ block content
         i(class="fa fa-plus-square-o")
         | New Plan
     div(class="col-md-4")
-      - var searchInputId = "planSearchInput"
-      - var searchInputPlaceHolder = "ID, Plan Name, Plan Tag ..."
-      include ./includes/searchinput.jade
-  - var columns = ["Plan Name", "Case Set", "Test Env", "#"]
-  include ./includes/table.jade
+      +searchinput("planSearchInput", "ID, Plan Name, Plan Tag ...")
+  +table("Plan Name", "Case Set", "Test Env", "#")
 
 block script
   script(src="js/testplan.js")

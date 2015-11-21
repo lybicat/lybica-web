@@ -1,11 +1,11 @@
 extends ./layout.jade
+include ./includes/table.jade
 
 block title
   title Lybica Resource Manager
 
 block content
-  - var columns = ["Status", "Name", "IP Addr.", "Build Version", "Tags", "#"]
-  include ./includes/table.jade
+  +table("Status", "Name", "IP Addr.", "Build Version", "Tags", "#")
   div
     button(type="submit", class="btn btn-success")
       i(class="fa fa-plus-square-o")

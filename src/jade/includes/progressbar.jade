@@ -1,0 +1,13 @@
+mixin progressbar(passrate, failedrate)
+  div.progress
+    div.progress-bar(class="progress-bar-success", style="width: " + passrate + "%")
+      div.sr-only PASS (passrate%)
+    div.progress-bar(class="progress-bar-danger", style="width: " + failedrate + "%")
+      div.sr-only FAILED (failedrate%)
+
+mixin progressbar-striped(passrate, failedrate)
+  div.progress(class="progress-striped")
+    div.progress-bar(class="progress-bar-success", style="width: " + passrate + "%")
+      div.sr-only PASS (passrate%)
+    div.progress-bar(class="progress-bar-danger", style="width: " + failedrate + "%")
+      div.sr-only FAILED (failedrate%)

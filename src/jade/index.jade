@@ -1,4 +1,6 @@
 extends ./layout.jade
+include ./includes/searchinput.jade
+include ./includes/table.jade
 
 block title
   title Lybica Dashboard
@@ -9,11 +11,8 @@ block content
       button(class="btn btn-default active", href="javascript:void(0)")#activeTasksBtn Active
       button(class="btn btn-default", href="javascript:void(0)")#doneTasksBtn Done
     div.col-md-4
-      - var searchInputId = "taskSearchInput"
-      - var searchInputPlaceHolder = "ID, Plan Name ..."
-      include ./includes/searchinput.jade
-  - var columns = ["Status", "Build", "Test Plan", "Env", "Triggered By", "Triggered At", "#"]
-  include ./includes/table.jade
+      +searchinput("taskSearchInput", "ID, Plan Name ...")
+  +table("Status", "Build", "Test Plan", "Env", "Triggered By", "Triggered At", "#")
 
 block script
   script(src="js/taskqueue.js")

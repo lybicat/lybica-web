@@ -1,4 +1,6 @@
 extends ./layout.jade
+include ./includes/searchinput.jade
+include ./includes/table.jade
 
 block title
   title Lybica Test Agent
@@ -6,11 +8,8 @@ block title
 block content
   div.row
     div.col-md-4(class="col-md-offset-8")
-      - var searchInputId = "agentSearchInput"
-      - var searchInputPlaceHolder = "Agent Name, IP or Labels ..."
-      include ./includes/searchinput.jade
-  - var columns = ["Status", "Name", "IP Addr.", "# of Runners", "Labels", "#"]
-  include ./includes/table.jade
+      +searchinput("agentSearchInput", "Agent Name, IP or Labels ...")
+  +table("Status", "Name", "IP Addr.", "# of Runners", "Labels", "#")
 
 block script
   script(src="js/testagent.js")

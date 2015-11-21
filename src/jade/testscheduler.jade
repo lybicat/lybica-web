@@ -1,4 +1,5 @@
 extends ./layout.jade
+include ./includes/searchinput.jade
 
 block title
   title Lybica Test Scheduler
@@ -6,9 +7,7 @@ block title
 block content
   div.row
     div.col-md-4(class="col-md-offset-8")
-      - var searchInputId = "schedulerSearchInput"
-      - var searchInputPlaceHolder = "Build Name, Plan Name ..."
-      include ./includes/searchinput.jade
+      +searchinput("schedulerSearchInput", "Build Name, Plan Name ...")
   div.testscheduler#testScheduleCalendar
 
 block script

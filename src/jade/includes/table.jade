@@ -1,6 +1,7 @@
-table(class=["table", "table-hover"])
-  thead
-    tr
-      for col in columns
-        th= col
-  tbody
+mixin table(...columns)
+  table(class=["table", "table-hover"])
+    thead
+      tr
+        for col in columns
+          th= col
+    tbody
