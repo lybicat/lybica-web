@@ -22,4 +22,17 @@ var TestPlan = {
   }
 };
 
+$('#newPlanBtn').click(function() {
+  $('#planEditForm').removeClass('hidden');
+});
+
+$('#saveBtn').click(function() {
+  // TODO: save plan here
+  $('#planEditForm').addClass('hidden');
+});
+
+$('#cancelBtn').click(function() {
+  $('#planEditForm').addClass('hidden');
+});
+
 TestPlan.render('#content-wrapper>table>tbody');

@@ -6,14 +6,59 @@ block title
   title Lybica Test Plan
 
 block content
-  div(class="row")
-    div(class="col-md-8")
-      button(type="submit", class="btn btn-success")
-        i(class="fa fa-plus-square-o")
+  .row
+    .col-md-8
+      button.btn(type="submit", class="btn-success")#newPlanBtn
+        i.fa(class="fa-plus-square-o")
         | New Plan
-    div(class="col-md-4")
+    .col-md-4
       +searchinput("planSearchInput", "ID, Plan Name, Plan Tag ...")
-  +table("Plan Name", "Case Set", "Test Env", "#")
+  .row
+    .col-md-12(class="hidden")#planEditForm
+      hr
+      form.form-horizontal
+        .form-group
+          label(class="col-sm-2 control-label") Name
+          .col-sm-10
+            input.form-control(type="text", placeholder="Unified Plan Name")
+        .form-group
+          label(class="col-sm-2 control-label") Case Repo
+          .col-sm-10
+            select.form-control
+              option
+              option repo1
+              option repo2
+              option trunk_repo
+        .form-group
+          label(class="col-sm-2 control-label") Case Set
+          .col-sm-10
+            textarea.form-control(rows="3", placeholder="case filter expression")
+        .form-group
+          label(class="col-sm-2 control-label") Device
+          .col-sm-10
+            select.form-control(multiple)
+              option TL1
+              option TL2
+              option TL3
+              option TL_Trunk
+        .form-group
+          label(class="col-sm-2 control-label") Action
+          .col-sm-10
+            select.form-control(multiple)
+              option install_build
+              option run_robotframework_repeatly
+        .form-group
+          .col-sm-10(class="col-sm-offset-2")
+            .checkbox
+              label
+                input(type="checkbox")
+                | Apply to all selected devices
+        .form-group
+          .col-sm-10(class="col-sm-offset-2")
+            button.btn(type="button", class="btn-default")#saveBtn Save
+            button.btn(type="reset", class="btn-default")#cancelBtn Cancel
+      hr
+  +table("Plan Name", "Case Set", "Test Env", "#")#planTable
 
 block script
   script(src="js/testplan.js")
