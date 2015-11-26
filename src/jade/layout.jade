@@ -8,8 +8,8 @@ html
     link(rel="stylesheet", href="css/main.css")
   body
     nav(class="navbar navbar-default navbar-fixed-top", role="banner")
-      div.container-fluid
-        div.navbar-header
+      .container-fluid
+        .navbar-header
           a.navbar-brand(href="/")
             i.fa(class="fa-home")
             | Lybica
@@ -40,10 +40,10 @@ html
               a(href="/testagent.html")#testAgentLink
                 i.fa(class="fa-cloud")
                 | Test Agent
-    div.container-fluid
-      div.row
-        div.col-sm-3
-          div.sidebar-nav
+    .container-fluid
+      .row
+        .col-sm-3
+          .sidebar-nav
             div(class="sidebar-nav navbar navbar-default", role="navigation")
               div(class="navbar-collapse collapse sidebar-navbar-collapse")
                 ul(class="nav navbar-nav")
@@ -63,7 +63,7 @@ html
                     a(href="javascript:void(0)")#idleDevicesLink
                       | Idle Devices
                       span.badge#idleDevicesCount 112
-        div.col-sm-9#content-wrapper
+        .col-sm-9#content-wrapper
           block content
   block script
     script(src="js/taskqueue.js")
