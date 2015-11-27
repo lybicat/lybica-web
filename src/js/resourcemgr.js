@@ -27,4 +27,17 @@ var ResourceManager = {
   }
 };
 
+$('#newDeviceBtn').click(function() {
+  $('#deviceEditForm').removeClass('hidden');
+});
+
+$('#saveBtn').click(function() {
+  // TODO: save device here
+  $('#deviceEditForm').addClass('hidden');
+});
+
+$('#cancelBtn').click(function() {
+  $('#deviceEditForm').addClass('hidden');
+});
+
 ResourceManager.render('#content-wrapper>table>tbody');

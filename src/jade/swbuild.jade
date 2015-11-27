@@ -1,10 +1,15 @@
 extends ./layout.jade
+include ./includes/searchinput.jade
+include ./includes/table.jade
 
 block title
   title Lybica SW Build
 
 block content
-  div#demoBuilds
+  div.row
+    div.col-md-4(class="col-md-offset-8")
+      +searchinput("buildSearchInput", "Build Name, status...")
+  +table("Status", "Build", "Release", "Tags", "GPA", "#")
 
 block script
   script(src="js/swbuild.js")
