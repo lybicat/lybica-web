@@ -6,11 +6,11 @@ block title
   title Lybica Dashboard
 
 block content
-  div.row
-    div.col-md-8
+  .row
+    .col-md-8
       button(class="btn btn-default active", href="javascript:void(0)")#activeTasksBtn Active
       button(class="btn btn-default", href="javascript:void(0)")#doneTasksBtn Done
-    div.col-md-4
+    .col-md-4
       +searchinput("taskSearchInput", "ID, Plan Name ...")
   +table("Status", "Build", "Test Plan", "Env", "Triggered By", "Triggered At", "#")
 

@@ -1,6 +1,7 @@
 extends ./layout.jade
 include ./includes/searchinput.jade
 include ./includes/table.jade
+include ./includes/form.jade
 
 block title
   title Lybica Test Plan
@@ -17,50 +18,15 @@ block content
     .col-md-12(class="hidden")#planEditForm
       hr
       form.form-horizontal
-        .form-group
-          label(class="col-sm-2 control-label") Name
-          .col-sm-10
-            input.form-control(type="text", placeholder="Unified Plan Name")
-        .form-group
-          label(class="col-sm-2 control-label") Label
-          .col-sm-10
-            input.form-control(type="text", placeholder="Labels")
-        .form-group
-          label(class="col-sm-2 control-label") Case Repo
-          .col-sm-10
-            select.form-control
-              option
-              option repo1
-              option repo2
-              option trunk_repo
-        .form-group
-          label(class="col-sm-2 control-label") Case Set
-          .col-sm-10
-            textarea.form-control(rows="3", placeholder="case filter expression")
-        .form-group
-          label(class="col-sm-2 control-label") Device
-          .col-sm-10
-            select.form-control(multiple)
-              option TL1
-              option TL2
-              option TL3
-              option TL_Trunk
-        .form-group
-          label(class="col-sm-2 control-label") Action
-          .col-sm-10
-            select.form-control(multiple)
-              option install_build
-              option run_robotframework_repeatly
-        .form-group
-          .col-sm-10(class="col-sm-offset-2")
-            .checkbox
-              label
-                input(type="checkbox")
-                | Apply to all selected devices
-        .form-group
-          .col-sm-10(class="col-sm-offset-2")
-            button.btn(type="button", class="btn-default")#saveBtn Save
-            button.btn(type="reset", class="btn-default")#cancelBtn Cancel
+        +input("Name", "text", "Unified Plan Name")
+        +input("Label", "text", "Labels")
+        +select("Case Repo", ["", "repo1", "repo2", "trunk_repo"])
+        +textarea("Case Set", 3, "case filter expression")
+        +multipleselect("Device", ["TL1", "TL2", "TL3", "TL_Trunk"])
+        +multipleselect("Action", ["install_build", "run_robotframework_repeatly"])
+        +checkbox("Apply to all selected devices")
+        +buttons([{id: "saveBtn", text: "Save", type: "button", class: "btn-default"},
+          {id: "cancelBtn", text: "Cancel", type: "reset", class: "btn-default"}])
       hr
   +table("Plan Name", "Case Set", "Test Env", "#")#planTable
 

@@ -1,6 +1,7 @@
 extends ./layout.jade
 include ./includes/searchinput.jade
 include ./includes/table.jade
+include ./includes/form.jade
 
 block title
   title Lybica Resource Manager
@@ -17,26 +18,12 @@ block content
     .col-md-12(class="hidden")#deviceEditForm
       hr
       form.form-horizontal
-        .form-group
-          label(class="col-sm-2 control-label") Name
-          .col-sm-10
-            input.form-control(type="text", placeholder="Unified Device Name")
-        .form-group
-          label(class="col-sm-2 control-label") IP Addr.
-          .col-sm-10
-            input.form-control(type="text", placeholder="Unified Device IP Addr.")
-        .form-group
-          label(class="col-sm-2 control-label") Label
-          .col-sm-10
-            input.form-control(type="text", placeholder="Labels")
-        .form-group
-          label(class="col-sm-2 control-label") Extra Fields
-          .col-sm-10
-            textarea.form-control(rows=5, placeholder="<KEY>=<VALUE>, one field, one line")
-        .form-group
-          .col-sm-10(class="col-sm-offset-2")
-            button.btn(type="button", class="btn-default")#saveBtn Save
-            button.btn(type="reset", class="btn-default")#cancelBtn Cancel
+        +input("Name", "text", "Unified Device Name")
+        +input("IP Addr", "text", "Unified Device IP Addr")
+        +input("Label", "text", "Labels")
+        +textarea("Extra Fields", 5, "<KEY>=<VALUE>, one field, one line")
+        +buttons([{id: "saveBtn", text: "Save", type: "button", class: "btn-default"},
+          {id: "cancelBtn", text: "Cancel", type: "reset", class: "btn-default"}])
       hr
   +table("Status", "Name", "IP Addr.", "Build Version", "Tags", "#")
 

@@ -1,0 +1,41 @@
+mixin input(name, type, placeholder)
+  .form-group
+    label(class="col-sm-2 control-label")= name
+    .col-sm-10
+      input.form-control(type=type, placeholder=placeholder)
+
+mixin textarea(name, rows, placeholder)
+  .form-group
+    label(class="col-sm-2 control-label")= name
+    .col-sm-10
+      textarea.form-control(rows=rows, placeholder=placeholder)
+
+mixin buttons(btns)
+  .form-group
+    .col-sm-10(class="col-sm-offset-2")
+      for btn in btns
+        button.btn(type=btn.type, class=btn.class, id=btn.id)= btn.text
+
+mixin checkbox(text)
+  .form-group
+    .col-sm-10(class="col-sm-offset-2")
+      .checkbox
+        label
+          input(type="checkbox")
+          | #{text}
+
+mixin select(name, options)
+  .form-group
+    label(class="col-sm-2 control-label")= name
+    .col-sm-10
+      select.form-control
+        for opt in options
+          option= opt
+
+mixin multipleselect(name, options)
+  .form-group
+    label(class="col-sm-2 control-label")= name
+    .col-sm-10
+      select.form-control(multiple)
+        for opt in options
+          option= opt
