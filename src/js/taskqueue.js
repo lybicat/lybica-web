@@ -1,5 +1,6 @@
 var $ = require('jquery');
 var moment = require('moment');
+var socket = require('./includes/socket')();
 
 var TaskQueue = {
   render: function(container, showDoneTasks) {
