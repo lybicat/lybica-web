@@ -1,6 +1,5 @@
 var $ = require('jquery');
 var moment = require('moment');
-var socket = require('./includes/socket')();
 
 var TaskQueue = {
   render: function(container, showDoneTasks) {
@@ -20,10 +19,13 @@ var TaskQueue = {
     var apiUrl = showDoneTasks === true ? '/api/tasks/done' : '/api/tasks';
 
     function _getTaskLogLink(task) {
-      if (task.done)
-        return '<a class="ci-more" target="_blank" href="' + task.loglink + '"><i class="fa fa-external-link"></i></a>';
-      else if (task.started)
-        return '<a class="ci-more" target="_blank" href="' + task.consolelink + '"><i class="fa fa-external-link"></i></a>';
+      if (task.done) {
+        return '<a class="ci-more" target="_blank" href="' + task.consolelink + '"><i class="fa fa-terminal"></i></a>' +
+          '<a class="ci-more" target="_blank" href="' + task.loglink + '"><i class="fa fa-external-link"></i></a>';
+      } else if (task.started) {
+        return '<a class="ci-more" target="_blank" href="/console.html?task=' + task._id + '"><i class="fa fa-terminal"></i></a>';
+      }
+
       return '';
     }
 

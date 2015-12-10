@@ -9,7 +9,8 @@ module.exports = function(grunt) {
                     'dist/testreport.html': 'src/jade/testreport.jade',
                     'dist/swbuild.html': 'src/jade/swbuild.jade',
                     'dist/testscheduler.html': 'src/jade/testscheduler.jade',
-                    'dist/testagent.html': 'src/jade/testagent.jade'
+                    'dist/testagent.html': 'src/jade/testagent.jade',
+                    'dist/console.html': 'src/jade/console.jade'
                 }
             }
         },
@@ -22,7 +23,8 @@ module.exports = function(grunt) {
                     'dist/js/testreport.js': 'src/js/testreport.js',
                     'dist/js/swbuild.js': 'src/js/swbuild.js',
                     'dist/js/testscheduler.js': 'src/js/testscheduler.js',
-                    'dist/js/testagent.js': 'src/js/testagent.js'
+                    'dist/js/testagent.js': 'src/js/testagent.js',
+                    'dist/js/console.js': 'src/js/console.js'
                 }
             }
         },
@@ -35,7 +37,8 @@ module.exports = function(grunt) {
                     'dist/js/testreport.js': 'dist/js/testreport.js',
                     'dist/js/swbuild.js': 'dist/js/swbuild.js',
                     'dist/js/testscheduler.js': 'dist/js/testscheduler.js',
-                    'dist/js/testagent.js': 'dist/js/testagent.js'
+                    'dist/js/testagent.js': 'dist/js/testagent.js',
+                    'dist/js/console.js': 'src/js/console.js'
                 }
             }
         }
