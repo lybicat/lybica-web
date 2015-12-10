@@ -24,6 +24,7 @@ module.exports = function(grunt) {
                     'dist/js/swbuild.js': 'src/js/swbuild.js',
                     'dist/js/testscheduler.js': 'src/js/testscheduler.js',
                     'dist/js/testagent.js': 'src/js/testagent.js',
+                    'dist/js/includes/socket.js': 'src/js/includes/socket.js',
                     'dist/js/console.js': 'src/js/console.js'
                 }
             }
@@ -38,7 +39,8 @@ module.exports = function(grunt) {
                     'dist/js/swbuild.js': 'dist/js/swbuild.js',
                     'dist/js/testscheduler.js': 'dist/js/testscheduler.js',
                     'dist/js/testagent.js': 'dist/js/testagent.js',
-                    'dist/js/console.js': 'src/js/console.js'
+                    'dist/js/includes/socket.js': 'dist/js/includes/socket.js',
+                    'dist/js/console.js': 'dist/js/console.js'
                 }
             }
         }
