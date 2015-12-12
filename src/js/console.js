@@ -1,3 +1,6 @@
+/* jshint node: true */
+'use strict';
+
 var $ = require('jquery');
 var getUrlParameter = require('./includes/utils').getUrlParameter;
 

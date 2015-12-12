@@ -1,3 +1,6 @@
+/* jshint node: true */
+'use strict';
+
 var $ = require('jquery');
 global.jQuery = global.$ = $;
 require('fullcalendar');

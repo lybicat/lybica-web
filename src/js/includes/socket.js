@@ -1,5 +1,8 @@
+/* jshint node: true */
+'use strict';
+
 module.exports = function(taskId, dataCallback) {
-  var socket = io();
+  var socket = io(); // in the page, you should include socket.io.js first
   socket.on('connect', function() {
     socket.emit('console', {from: socket.id, task: taskId});
   });
@@ -10,4 +13,3 @@ module.exports = function(taskId, dataCallback) {
 
   return socket;
 };
-

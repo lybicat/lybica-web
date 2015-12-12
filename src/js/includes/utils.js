@@ -1,3 +1,6 @@
+/* jshint node: true */
+'use strict';
+
 module.exports.getUrlParameter = function (sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1));
     var sURLVariable = sPageURL.split('&').map(function(varStr) {

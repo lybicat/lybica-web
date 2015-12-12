@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Web UI for lybica",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lybicat/lybica-web.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "html": "grunt jade",
