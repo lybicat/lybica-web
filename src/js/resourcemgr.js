@@ -2,6 +2,9 @@
 'use strict';
 
 var $ = require('jquery');
+global.jQuery = global.$ = $;
+require('select2');
+var postJSON = require('./includes/utils').postJSON;
 
 var ResourceManager = {
   render: function(container) {
@@ -32,6 +35,7 @@ var ResourceManager = {
 
 $('#newDeviceBtn').click(function() {
   $('#deviceEditForm').removeClass('hidden');
+  $('#devLabels').select2({tags: true});
 });
 
 $('#saveBtn').click(function() {

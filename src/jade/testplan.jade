@@ -23,7 +23,7 @@ block content
       form.form-horizontal
         +input("planName", "Name", "text", "Unified Plan Name")
         +multipleselect("planLabels", "Label", ["CP", "IV"])
-        +select("planCaseRepo", "Case Repo", ["", "repo1", "repo2", "trunk_repo"])
+        +select("planCaseRepo", "Case Repo", ["repo1", "repo2", "trunk_repo"])
         +textarea("planCaseSet", "Case Set", 3, "case filter expression")
         +multipleselect("planDevices", "Device", ["TL1", "TL2", "TL3", "TL_Trunk"])
         +multipleselect("planActions", "Action", ["install_build", "run_robotframework_repeatly"])

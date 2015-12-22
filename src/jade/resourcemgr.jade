@@ -6,6 +6,9 @@ include ./includes/form.jade
 block title
   title Lybica Resource Manager
 
+block css
+  link(rel="stylesheet", href="css/resourcemgr.css")
+
 block content
   .row
     .col-md-8
@@ -20,7 +23,7 @@ block content
       form.form-horizontal
         +input("devName", "Name", "text", "Unified Device Name")
         +input("devIP", "IP Addr", "text", "Unified Device IP Addr")
-        +input("devLabels", "Label", "text", "Labels")
+        +multipleselect("devLabels", "Label", ["LINUX", "BTS"])
         +textarea("devFields", "Extra Fields", 5, "<KEY>=<VALUE>, one field, one line")
         +buttons([{id: "saveBtn", text: "Save", type: "button", class: "btn-default"},
           {id: "cancelBtn", text: "Cancel", type: "reset", class: "btn-default"}])

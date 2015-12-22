@@ -10,6 +10,7 @@ module.exports = function(grunt) {
           'dist/css/main.css': 'src/css/main.styl',
           'dist/css/testplan.css': 'src/css/testplan.styl',
           'dist/css/testscheduler.css': 'src/css/testscheduler.styl',
+          'dist/css/resourcemgr.css': 'src/css/resourcemgr.styl',
         }
       }
     },
