@@ -33,6 +33,7 @@ $('#newPlanBtn').click(function() {
 $('#saveBtn').click(function() {
   // TODO: save plan here
   $('#planEditForm').addClass('hidden');
+  $.notify('plan saved!', 'success');
 });
 
 $('#cancelBtn').click(function() {
