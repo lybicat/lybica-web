@@ -24,7 +24,7 @@ var TestPlan = {
                '</tr>';
       }).join('');
 
-      $(container).append(tableRows);
+      $(container).empty().append(tableRows);
     });
   }
 };
@@ -54,9 +54,10 @@ $('#saveBtn').click(function() {
 
   postJSON('/api/plans', data, function() {
     $('#planEditForm').addClass('hidden');
-    $.notify('plan saved!', 'success');
+    $.notify('plan saved!', {className: 'success', position: 'top center'});
+    render();
   }, function() {
-    $.notify('failed to save plan', 'error');
+    $.notify('failed to save plan', {className: 'error', position: 'top center'});
   });
 });
 
@@ -64,5 +65,8 @@ $('#cancelBtn').click(function() {
   $('#planEditForm').addClass('hidden');
 });
 
-TestPlan.render('#content-wrapper>table>tbody');
+function render() {
+  TestPlan.render('#content-wrapper>table>tbody');
+}
 
+render();
