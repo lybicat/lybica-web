@@ -38,7 +38,7 @@ function makePlanEditable() {
   $('#planEditForm').removeClass('hidden');
   $('#planLabels').select2({tags: true});
   $('#planCaseRepo').select2();
-  $('#planDevices').select2()https://api.github.com/search/repositoriesdata.id;;
+  $('#planDevices').select2();
   $('#planActions').select2();
 }
 
