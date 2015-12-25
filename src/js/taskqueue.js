@@ -38,7 +38,7 @@ var TaskQueue = {
         return '<tr>' +
                '  <td><span class="ci-status ci-' + statusTxt + '">' + statusIcon[statusTxt] + statusTxt + '</span></td>' +
                '  <td><a class="ci-build" href="">' + d.build + '</a></td>' +
-               '  <td><a class="ci-plan">' + (d.plan || 'PILOT') + '</a></td>' +
+               '  <td><a class="ci-plan" href="/api/plan/' + d.planid + '">' + (d.planname || 'N/A') + '</a></td>' +
                '  <td><a class="ci-device">' + d.devices.join(';') + '</a></td>' +
                '  <td><a class="ci-trigger">' + d.triggerby + '</a></td>' +
                '  <td><a class="ci-time">' + moment(d.triggerat).fromNow() + '</a></td>' +

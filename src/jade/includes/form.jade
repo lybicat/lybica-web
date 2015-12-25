@@ -1,6 +1,7 @@
 mixin input(id, name, type, placeholder)
   .form-group
-    label(class="col-sm-2 control-label")= name
+    if type != "hidden"
+      label(class="col-sm-2 control-label")= name
     .col-sm-10
       input.form-control(id=id, type=type, placeholder=placeholder)
 
