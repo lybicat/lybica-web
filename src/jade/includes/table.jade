@@ -3,5 +3,5 @@ mixin table(...columns)
     thead
       tr
         for col in columns
-          th= col
+          th(class=col.class)= col.name
     tbody

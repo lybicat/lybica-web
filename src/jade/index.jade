@@ -12,7 +12,7 @@ block content
       button(class="btn btn-default", href="javascript:void(0)")#doneTasksBtn Done
     .col-md-4
       +searchinput("taskSearchInput", "ID, Plan Name ...")
-  +table("Status", "Build", "Test Plan", "Env", "Triggered By", "Triggered At", "#")
+  +table({class: "col-sm-1", name: "Status"}, {class: "col-sm-3", name: "Build"}, {class: "col-sm-2", name: "Test Plan"}, {class: "col-sm-2", name: "Env"}, {class: "col-sm-2", name: "Triggered By"}, {class: "col-sm-2", name: "Triggered At"}, {class: "col-sm-1", name: "#"})#planTable
 
 block script
   script(src="js/taskqueue.js")

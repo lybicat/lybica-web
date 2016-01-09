@@ -29,3 +29,25 @@ module.exports.postJSON = function(url, data, callback, errCallback) {
   .fail(errCallback);
 };
 
+module.exports.enableSelect2 = function(container, reqUrl, reqType, resultFunc) {
+  $(container).select2({
+    ajax: {
+      url: reqUrl,
+      type: reqType,
+      traditional: true,
+      dataType: 'json',
+      contentType: 'application/json',
+      delay: 500,
+      processResults: resultFunc,
+      cache: true
+    },
+    templateResult: function(datum) {
+      if (datum.loading) return datum.text;
+
+      return datum.id;
+    },
+    templateSelection: function(datum) {
+      return datum.id || datum.text;
+    },
+  });
+};

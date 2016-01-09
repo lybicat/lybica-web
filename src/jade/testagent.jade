@@ -9,7 +9,7 @@ block content
   div.row
     div.col-md-4(class="col-md-offset-8")
       +searchinput("agentSearchInput", "Agent Name, IP or Labels ...")
-  +table("Status", "Name", "IP Addr.", "# of Runners", "Labels", "#")
+  +table({class: "col-sm-1", name: "Status"}, {class: "col-sm-2", name: "Name"}, {class: "col-sm-2", name: "IP Addr."}, {class: "col-sm-2", name: "# of Runners"}, {class: "col-sm-4", name: "Labels"}, {class: "col-sm-1", name: "#"})#planTable
 
 block script
   script(src="js/testagent.js")

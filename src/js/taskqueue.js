@@ -5,7 +5,18 @@ var $ = require('jquery');
 var moment = require('moment');
 
 var TaskQueue = {
-  render: function(container, showDoneTasks) {
+  page: 1,
+  end: false,
+  done: false,
+  render: function(container, clear) {
+    var self = this;
+
+    if (clear === true) {
+      self.page = 1;
+      self.end = false;
+      $(container).empty();
+    }
+
     function _getStatusTxt(d) {
       if (d.started === false) return 'pending';
       if (d.done) return d.passed ? 'passed' : 'failed';
@@ -19,7 +30,7 @@ var TaskQueue = {
       running: '<i class="fa fa-refresh"></i>'
     };
 
-    var apiUrl = showDoneTasks === true ? '/api/tasks/done' : '/api/tasks';
+    var apiUrl = self.done === true ? '/api/tasks/done' : '/api/tasks';
 
     function _getTaskLogLink(task) {
       if (task.done) {
@@ -32,7 +43,12 @@ var TaskQueue = {
       return '';
     }
 
-    $.getJSON(apiUrl, function(data) {
+    $.getJSON(apiUrl + '?page=' + self.page, function(data) {
+      if (data.length === 0) {
+        self.end = true;
+        return;
+      }
+
       var tableRows = data.map(function(d) {
         var statusTxt = _getStatusTxt(d);
         return '<tr>' +
@@ -46,7 +62,7 @@ var TaskQueue = {
                '</tr>';
       }).join('');
 
-      $(container).empty().append(tableRows);
+      $(container).append(tableRows);
     });
   }
 };
@@ -55,14 +71,27 @@ var TaskQueue = {
 $('#activeTasksBtn').click(function() {
   $(this).addClass('active');
   $('#doneTasksBtn').removeClass('active');
-  TaskQueue.render('#content-wrapper>table>tbody');
+  TaskQueue.done = false;
+  TaskQueue.render('#content-wrapper>table>tbody', true);
 });
 
 $('#doneTasksBtn').click(function() {
   $(this).addClass('active');
   $('#activeTasksBtn').removeClass('active');
+  TaskQueue.done = true;
   TaskQueue.render('#content-wrapper>table>tbody', true);
 });
 
 // show the active tasks defaultly
 TaskQueue.render('#content-wrapper>table>tbody');
+
+// scroll to the end of page, load extra tasks
+$(window).scroll(function() {
+  if($(window).scrollTop() + $(window).height() >= ($(document).height() - 20)) {
+    if (TaskQueue.end === false) {
+      TaskQueue.page++;
+      TaskQueue.render('#content-wrapper>table>tbody');
+    }
+  }
+});
+

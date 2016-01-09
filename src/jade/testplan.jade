@@ -8,6 +8,7 @@ block title
 
 block css
   link(rel="stylesheet", href="css/testplan.css")
+  link(rel="stylesheet", href="css/bootstrap-treeview.min.css")
 
 block content
   .row
@@ -23,17 +24,18 @@ block content
       form.form-horizontal
         +input("planId", "Name", "hidden", "Unified Plan ID")
         +input("planName", "Name", "text", "Unified Plan Name")
-        +multipleselect("planLabels", "Label", ["CP", "IV"])
-        +select("planCaseRepo", "Case Repo", ["repo1", "repo2", "trunk_repo"])
-        +textarea("planCaseSet", "Case Set", 3, "case filter expression")
-        +multipleselect("planDevices", "Device", ["TL1", "TL2", "TL3", "TL_Trunk"])
-        +multipleselect("planActions", "Action", ["install_build", "run_robotframework_repeatly"])
-        +checkbox("planParallel", "Apply to all selected devices")
+        .form-group
+          label(class="col-sm-2 control-label") Case Set
+          .col-sm-10#planCaseSet
+        +multipleselect("planDevices", "Device Type", [])
+        +multipleselect("planActions", "Actions", ["task_hook", "run_pickup"])
         +buttons([{id: "saveBtn", text: "Save", type: "button", class: "btn-default"},
-          {id: "cancelBtn", text: "Cancel", type: "reset", class: "btn-default"}])
+          {id: "cancelBtn", text: "Cancel", type: "reset", class: "btn-default"},
+          {id: "delBtn", text: "Delete", type: "button", class: "btn-danger hidden"}])
       hr
-  +table("Plan Name", "Case Set", "Test Env", "#")#planTable
+  +table({class: "col-sm-2", name: "Name"}, {class: "col-sm-7", name: "Case Set"}, {class: "col-sm-2", name: "Env"}, {class: "col-sm-1", name: "#"})#planTable
 
 block script
   script(src="js/testplan.js")
   script(src="js/notify.min.js")
+  script(src="js/bootstrap-treeview.min.js")
