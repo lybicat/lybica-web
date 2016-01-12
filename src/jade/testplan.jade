@@ -8,7 +8,6 @@ block title
 
 block css
   link(rel="stylesheet", href="css/testplan.css")
-  link(rel="stylesheet", href="css/bootstrap-treeview.min.css")
 
 block content
   .row
@@ -24,9 +23,8 @@ block content
       form.form-horizontal
         +input("planId", "Name", "hidden", "Unified Plan ID")
         +input("planName", "Name", "text", "Unified Plan Name")
-        .form-group
-          label(class="col-sm-2 control-label") Case Set
-          .col-sm-10#planCaseSet
+        +select("planCaseRepo", "Case Repo", [])
+        +textarea("planCaseExpr", "Case Filter Expression", 5, "Set filter expression here")
         +multipleselect("planDevices", "Device Type", [])
         +multipleselect("planActions", "Actions", ["task_hook", "run_pickup"])
         +buttons([{id: "saveBtn", text: "Save", type: "button", class: "btn-default"},
@@ -38,4 +36,3 @@ block content
 block script
   script(src="js/testplan.js")
   script(src="js/notify.min.js")
-  script(src="js/bootstrap-treeview.min.js")
