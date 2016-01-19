@@ -13,15 +13,20 @@ var Plan = {
       });
     })
     .then(function(cont, plan) {
-      var task = {
-        planid: plan._id,
-        planname: plan.name,
-        build: buildId,
-        cases: plan.cases,
-        devices: plan.devices, // TODO: get from device service
-        actions: plan.actions,
-        labels: [], // TODO: get from device
-      };
+      postJSON('//10.69.80.114/api/devices/reserve', {devices: plan.devices}, function(devices) {
+        var task = {
+          planid: plan._id,
+          planname: plan.name,
+          build: buildId,
+          cases: plan.cases,
+          devices: devices,
+          actions: plan.actions,
+          labels: [], // TODO: get from device
+        };
+        cont(null, task);
+      }, cont);
+    })
+    .then(function(cont, task) {
       postJSON('/api/tasks', task, function() {
         cont(null);
       }, function(err) {

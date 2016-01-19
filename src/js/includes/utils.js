@@ -31,6 +31,7 @@ module.exports.postJSON = function(url, data, callback, errCallback) {
 
 module.exports.enableSelect2 = function(container, reqUrl, reqType, resultFunc) {
   $(container).select2({
+    width: 'resolve',
     ajax: {
       url: reqUrl,
       type: reqType,

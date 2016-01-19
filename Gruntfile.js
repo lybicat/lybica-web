@@ -9,6 +9,8 @@ module.exports = function(grunt) {
         files: {
           'dist/css/main.css': 'src/css/main.styl',
           'dist/css/testplan.css': 'src/css/testplan.styl',
+          'dist/css/testtrigger.css': 'src/css/testtrigger.styl',
+          'dist/css/testagent.css': 'src/css/testagent.styl',
           'dist/css/testscheduler.css': 'src/css/testscheduler.styl',
           'dist/css/resourcemgr.css': 'src/css/resourcemgr.styl',
         }
@@ -24,6 +26,7 @@ module.exports = function(grunt) {
           'dist/swbuild.html': 'src/jade/swbuild.jade',
           'dist/testscheduler.html': 'src/jade/testscheduler.jade',
           'dist/testagent.html': 'src/jade/testagent.jade',
+          'dist/testtrigger.html': 'src/jade/testtrigger.jade',
           'dist/console.html': 'src/jade/console.jade'
         }
       }
@@ -38,6 +41,7 @@ module.exports = function(grunt) {
           'dist/js/swbuild.js': 'src/js/swbuild.js',
           'dist/js/testscheduler.js': 'src/js/testscheduler.js',
           'dist/js/testagent.js': 'src/js/testagent.js',
+          'dist/js/testtrigger.js': 'src/js/testtrigger.js',
           'dist/js/console.js': 'src/js/console.js'
         }
       }
@@ -52,6 +56,7 @@ module.exports = function(grunt) {
           'dist/js/swbuild.js': 'dist/js/swbuild.js',
           'dist/js/testscheduler.js': 'dist/js/testscheduler.js',
           'dist/js/testagent.js': 'dist/js/testagent.js',
+          'dist/js/testtrigger.js': 'dist/js/testtrigger.js',
           'dist/js/console.js': 'dist/js/console.js'
         }
       }

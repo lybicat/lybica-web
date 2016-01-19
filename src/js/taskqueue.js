@@ -19,6 +19,7 @@ var TaskQueue = {
 
     function _getStatusTxt(d) {
       if (d.started === false) return 'pending';
+      if (d.aborted) return 'aborted';
       if (d.done) return d.passed ? 'passed' : 'failed';
       return 'running';
     }
@@ -26,6 +27,7 @@ var TaskQueue = {
     var statusIcon = {
       passed: '<i class="fa fa-check"></i>',
       failed: '<i class="fa fa-close"></i>',
+      aborted: '<i class="fa fa-bolt"></i>',
       pending: '<i class="fa fa-clock-o"></i>',
       running: '<i class="fa fa-refresh"></i>'
     };
@@ -33,7 +35,9 @@ var TaskQueue = {
     var apiUrl = self.done === true ? '/api/tasks/done' : '/api/tasks';
 
     function _getTaskLogLink(task) {
-      if (task.done) {
+      if(task.aborted) {
+        return '';
+      } else if (task.done) {
         return '<a class="ci-more" target="_blank" href="' + task.consolelink + '"><i class="fa fa-terminal"></i></a>' +
           '<a class="ci-more" target="_blank" href="' + task.loglink + '"><i class="fa fa-external-link"></i></a>';
       } else if (task.started) {
@@ -53,7 +57,7 @@ var TaskQueue = {
         var statusTxt = _getStatusTxt(d);
         return '<tr>' +
                '  <td><span class="ci-status ci-' + statusTxt + '">' + statusIcon[statusTxt] + statusTxt + '</span></td>' +
-               '  <td><a class="ci-build" href="">' + d.build + '</a></td>' +
+               '  <td><a class="ci-build" href="javascript:void(0)">' + d.build + '</a></td>' +
                '  <td><a class="ci-plan" href="/api/plan/' + d.planid + '">' + (d.planname || 'N/A') + '</a></td>' +
                '  <td><a class="ci-device">' + d.devices.join(';') + '</a></td>' +
                '  <td><a class="ci-trigger">' + d.triggerby + '</a></td>' +
@@ -80,6 +84,13 @@ $('#doneTasksBtn').click(function() {
   $('#activeTasksBtn').removeClass('active');
   TaskQueue.done = true;
   TaskQueue.render('#content-wrapper>table>tbody', true);
+});
+
+$('body').on('click', '.ci-build', function(e) {
+  var build = $(this).text();
+  e.preventDefault();
+  $('#taskSearchInput input').val(build);
+  // TODO: rerender tasks
 });
 
 // show the active tasks defaultly

@@ -8,6 +8,14 @@ block title
 
 block css
   link(rel="stylesheet", href="css/testplan.css")
+  link(rel="stylesheet", href="css/bootstrap-treeview.min.css")
+
+block sidebar
+  li
+    h3 Continuous Integration
+    p Continuous integration (CI) is the practice, in software engineering, of merging all developer working copies to a shared mainline several times a day. It was first named and proposed by Grady Booch in his 1991 method,[1] although Booch did not advocate integrating several times a day. It was adopted as part of extreme programming (XP), which did advocate integrating more than once per day, perhaps as many as tens of times per day.
+      a(href="https://en.wikipedia.org/wiki/Continuous_integration", target="_blank")
+        i.fa(class="fa-external-link")
 
 block content
   .row
@@ -21,10 +29,11 @@ block content
     .col-md-12(class="hidden")#planEditForm
       hr
       form.form-horizontal
-        +input("planId", "Name", "hidden", "Unified Plan ID")
+        +input("planId", "Id", "hidden", "Unified Plan ID")
         +input("planName", "Name", "text", "Unified Plan Name")
-        +select("planCaseRepo", "Case Repo", [])
-        +textarea("planCaseExpr", "Case Filter Expression", 5, "Set filter expression here")
+        .form-group
+          label(class="col-sm-2 control-label") Case Set
+          .col-sm-10#planCaseSet
         +multipleselect("planDevices", "Device Type", [])
         +multipleselect("planActions", "Actions", ["task_hook", "run_pickup"])
         +buttons([{id: "saveBtn", text: "Save", type: "button", class: "btn-default"},
@@ -36,3 +45,4 @@ block content
 block script
   script(src="js/testplan.js")
   script(src="js/notify.min.js")
+  script(src="js/bootstrap-treeview.min.js")

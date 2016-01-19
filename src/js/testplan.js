@@ -12,9 +12,18 @@ var Plan = require('./includes/plan');
 var defaultActions = ['task_hook', 'run_pickup'];
 
 function _formatCases(cases) {
-  return _.map(cases, function(c) {
-    return '<b>' + c.repo + '</b>' + c.expr;
-  }).join('<br>');
+  var casesCount = cases.reduce(function(result, c) {
+    return result + (typeof(c.expr) === 'object' ? c.expr.length : 1);
+  }, 0);
+
+  if (casesCount === 0) return 'N/A';
+
+  var casesExpr = cases[0].expr;
+
+  if (typeof(casesExpr) === 'object') casesExpr = casesExpr[0];
+  if (casesCount > 1) casesExpr += '...';
+
+  return casesExpr + '<span class="badge">' + casesCount + '</span>';
 }
 
 var TestPlan = {
@@ -110,7 +119,7 @@ function _getChildren(node) {
 function makePlanEditable(checkedSuites) {
   $('#planEditForm').removeClass('hidden');
   // make device type select2
-  utils.enableSelect2('#planDevices', '/api/resources', 'GET', function(result) {
+  utils.enableSelect2('#planDevices', '/api/devices', 'GET', function(result) {
     var mappedResults = result.map(function(k) {
       return {id: k};
     });
@@ -119,9 +128,40 @@ function makePlanEditable(checkedSuites) {
   });
   // make actions select2
   $('#planActions').select2();
-  // make case set as select2
-  $('#planCaseRepo').select2();
-  $('#planCaseSet').select2();
+  // make case set as treeview
+  $('#planCaseSet').html('<h3><i class="fa fa-spinner fa-pulse"></i>loading cases...</h3>');
+  $.getJSON('/api/suites', function(suites) {
+    $('#planCaseSet').empty();
+    $('#planCaseSet').treeview({
+      data: _generateSuitesTree(suites, checkedSuites),
+      levels: 1,
+      showCheckbox: true,
+      showBorder: false,
+      showTags: false,
+      selectable: false,
+      multiSelect: true,
+      highlightSelected: false,
+      expandIcon: 'fa fa-plus-square-o',
+      collapseIcon: 'fa fa-minus-square-o',
+      checkedIcon: 'fa fa-check-square-o',
+      uncheckedIcon: 'fa fa-square-o',
+      onNodeChecked: function(event, node) {
+        var parentNodes = _getParents([node], $(this));
+        var childrenNodes = _.map(_getChildren(node), 'nodeId');
+        var allNodes = parentNodes.concat(childrenNodes);
+        $(this).treeview('checkNode', [allNodes, {silent: true}]);
+      },
+      onNodeUnchecked: function(event, node) {
+        var childrenNodes = _.map(_getChildren(node), 'nodeId');
+        $(this).treeview('uncheckNode', [childrenNodes, {silent: true}]);
+        // TODO: uncheck one node, uncheck all its children nodes, if it's the last checked node of parent nodes, uncheck them
+      },
+    });
+    // check and expand all parent nodes
+    var parentNodes = _getParents($('#planCaseSet').treeview('getChecked'), $('#planCaseSet'));
+    $('#planCaseSet').treeview('checkNode', [parentNodes, {silent: true}]);
+    $('#planCaseSet').treeview('expandNode', [parentNodes, {silent: true}]);
+  });
 }
 
 // new plan
@@ -195,7 +235,8 @@ $('#saveBtn').click(function() {
   });
 });
 
-$('#cancelBtn').click(function() {
+$('#cancelBtn').click(function(e) {
+  e.preventDefault();
   $('#planEditForm').addClass('hidden');
 });
 
@@ -226,16 +267,16 @@ $('body').on('click', '.plan-run', function(e) {
   var planId = $(this).prop('id');
   e.preventDefault();
 
-  var runDialogTemplate = '<form class="form-horizontal">' +
-      '  <div class="form-group">' +
-      '    <label class="col-sm-4 control-label">Build Version: </label>' +
-      '    <div class="col-sm-6"><input id="buildVersion" placeholder="Set Build Version here" class="form-control" type="text"></div>' +
-      '  </div>' +
-      '</form>';
-
   BootstrapDialog.show({
     title: 'Run the plan',
-    message: runDialogTemplate,
+    message: '<form class="form-horizontal">' +
+             '  <div class="form-group">' +
+             '    <label class="col-sm-4 control-label">Build Version: </label>' +
+             '    <div class="col-sm-6">' +
+             '      <select id="buildVersion" class="form-control"><option></option></select>' +
+             '    </div>' +
+             '  </div>' +
+             '</form>',
     buttons: [{
       label: 'Run',
       action: function(dialogItself) {
@@ -252,7 +293,18 @@ $('body').on('click', '.plan-run', function(e) {
       action: function(dialogItself){
         dialogItself.close();
       }
-    }]
+    }],
+    onshown: function(dialogItself) {
+      var dialogModal = dialogItself.getModal();
+      $(dialogModal).removeAttr('tabindex'); // refer to http://stackoverflow.com/questions/18487056/select2-doesnt-work-when-embedded-in-a-bootstrap-modal/18487440#18487440
+      utils.enableSelect2('#buildVersion', '//10.140.90.13/api/getAllBuild', 'GET', function(result) {
+        var mappedResults = result.map(function(k) {
+          return {id: k.name};
+        });
+
+        return {results: mappedResults};
+      });
+    },
   });
 });
 

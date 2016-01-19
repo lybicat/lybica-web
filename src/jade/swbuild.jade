@@ -5,11 +5,16 @@ include ./includes/table.jade
 block title
   title Lybica SW Build
 
+block sidebar
+  li
+    h3 Last Build
+    a(href="javascript:void(0)")#lastBuildVersion TL15A_ENB_0000_000655_000016
+
 block content
   div.row
     div.col-md-4(class="col-md-offset-8")
       +searchinput("buildSearchInput", "Build Name, status...")
-  +table({class: "col-sm-1", name: "Status"}, {class: "col-sm-2", name: "Build"}, {class: "col-sm-2", name: "Release"}, {class: "col-sm-4", name: "Tags"}, {class: "col-sm-2", name: "GPA"}, {class: "col-sm-1", name: "#"})#planTable
+  +table({class: "col-sm-3", name: "Build"}, {class: "col-sm-3", name: "Status"}, {class: "col-sm-3", name: "Labels"}, {class: "col-sm-2", name: "Start At"}, {class: "col-sm-1", name: "#"})#swbuildTable
 
 block script
   script(src="js/swbuild.js")
