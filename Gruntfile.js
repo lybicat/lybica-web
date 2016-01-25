@@ -13,6 +13,7 @@ module.exports = function(grunt) {
           'dist/css/testagent.css': 'src/css/testagent.styl',
           'dist/css/testscheduler.css': 'src/css/testscheduler.styl',
           'dist/css/resourcemgr.css': 'src/css/resourcemgr.styl',
+          'dist/css/console.css': 'src/css/console.styl',
         }
       }
     },
