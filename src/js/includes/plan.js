@@ -12,6 +12,7 @@ var Plan = {
         cont(null, plan);
       });
     })
+    // TODO: no reservation here, it will be handled in runner
     .then(function(cont, plan) {
       postJSON('//10.69.80.114/api/devices/reserve', {devices: plan.devices}, function(devices) {
         var task = {

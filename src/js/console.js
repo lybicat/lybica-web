@@ -15,6 +15,7 @@ var Console = {
     $(container).append('Console output of TASK "' + taskId + '"...\r\n');
     var socket = require('./includes/socket')(taskId, function(data) {
       $(container).append(data);
+      window.scrollTo(0, document.body.scrollHeight); // scroll to the end of page
     });
   }
 };

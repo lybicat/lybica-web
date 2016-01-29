@@ -3,6 +3,7 @@
 
 var $ = require('jquery');
 var moment = require('moment');
+var Plan = require('./includes/plan');
 
 var TaskQueue = {
   page: 1,
@@ -35,13 +36,17 @@ var TaskQueue = {
     var apiUrl = self.done === true ? '/api/tasks/done' : '/api/tasks';
 
     function _getTaskLogLink(task) {
+      var rerunLink = '<a class="task-rerun" target="_blank" href="javascript:void(0)"' +
+        ' buildid="' + task.build + '" planid="' + task.planid + '">' +
+        '<i class="fa fa-retweet"></i></a>';
+
       if(task.aborted) {
-        return '';
+        return rerunLink;
       } else if (task.done) {
-        return '<a class="ci-more" target="_blank" href="' + task.consolelink + '"><i class="fa fa-terminal"></i></a>' +
-          '<a class="ci-more" target="_blank" href="' + task.loglink + '"><i class="fa fa-external-link"></i></a>';
+        return '<a class="task-console" target="_blank" href="' + task.consolelink + '"><i class="fa fa-terminal"></i></a>' +
+          '<a class="task-artifact" target="_blank" href="' + task.loglink + '"><i class="fa fa-external-link"></i></a>' + rerunLink;
       } else if (task.started) {
-        return '<a class="ci-more" target="_blank" href="/console.html?task=' + task._id + '"><i class="fa fa-terminal"></i></a>';
+        return '<a class="task-console" target="_blank" href="/console.html?task=' + task._id + '"><i class="fa fa-terminal"></i></a>';
       }
 
       return '';
@@ -86,12 +91,27 @@ $('#doneTasksBtn').click(function() {
   TaskQueue.render('#content-wrapper>table>tbody', true);
 });
 
+// search tasks with specified build
 $('body').on('click', '.ci-build', function(e) {
   var build = $(this).text();
   e.preventDefault();
   $('#taskSearchInput input').val(build);
   // TODO: rerender tasks
 });
+
+// handle task rerun click
+$('body').on('click', '.task-rerun', function(e) {
+  var planId = $(this).attr('planid');
+  var buildId = $(this).attr('buildid');
+
+  e.preventDefault();
+  Plan.run(planId, buildId, function(err) {
+    if(err) return $.notify('failed to rerun the task, error: ' + err);
+
+    TaskQueue.done = false;
+    TaskQueue.render('#content-wrapper>table>tbody', true);
+  });
+})
 
 // show the active tasks defaultly
 TaskQueue.render('#content-wrapper>table>tbody');
