@@ -348,12 +348,10 @@ function render(clear) {
 render();
 
 // scroll to the end of page, load extra plans
-$(window).scroll(function() {
-  if($(window).scrollTop() + $(window).height() >= ($(document).height() - 20)) {
-    if (TestPlan.end === false) {
-      TestPlan.page++;
-      render();
-    }
+utils.infinitScroll(function() {
+  if (TestPlan.end === false) {
+    TestPlan.page++;
+    render();
   }
 });
 

@@ -3,6 +3,7 @@
 
 var $ = require('jquery');
 var moment = require('moment');
+var utils = require('./includes/utils');
 
 var SwBuild = {
   page: 1,
@@ -37,12 +38,10 @@ var SwBuild = {
 SwBuild.render('#content-wrapper>table>tbody');
 
 // scroll to the end of page, load extra tasks
-$(window).scroll(function() {
-  if($(window).scrollTop() + $(window).height() >= ($(document).height() - 20)) {
-    if (SwBuild.end === false) {
-      SwBuild.page++;
-      SwBuild.render('#content-wrapper>table>tbody');
-    }
+utils.infinitScroll(function() {
+  if (SwBuild.end === false) {
+    SwBuild.page++;
+    SwBuild.render('#content-wrapper>table>tbody');
   }
 });
 

@@ -4,6 +4,7 @@
 var $ = require('jquery');
 var moment = require('moment');
 var Plan = require('./includes/plan');
+var utils = require('./includes/utils');
 
 var TaskQueue = {
   page: 1,
@@ -117,12 +118,10 @@ $('body').on('click', '.task-rerun', function(e) {
 TaskQueue.render('#content-wrapper>table>tbody');
 
 // scroll to the end of page, load extra tasks
-$(window).scroll(function() {
-  if($(window).scrollTop() + $(window).height() >= ($(document).height() - 20)) {
-    if (TaskQueue.end === false) {
-      TaskQueue.page++;
-      TaskQueue.render('#content-wrapper>table>tbody');
-    }
+utils.infinitScroll(function() {
+  if (TaskQueue.end === false) {
+    TaskQueue.page++;
+    TaskQueue.render('#content-wrapper>table>tbody');
   }
 });
 

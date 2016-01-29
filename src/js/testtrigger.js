@@ -12,6 +12,12 @@ var TestTrigger = {
   render: function(container, clear) {
     var self = this;
 
+    if (clear === true) {
+      self.page = 1;
+      self.end = false;
+      $(container).empty();
+    }
+
     $.getJSON('/api/triggers?page=' + self.page, function(data) {
       if (data.length === 0) {
         self.end = true;
@@ -27,10 +33,6 @@ var TestTrigger = {
                '      <a id="' + d._id + '" class="trigger-' + onOff + '"><i class="fa fa-toggle-' + onOff + '"></i></a></td>' +
                '</tr>';
       }).join('');
-
-      if (clear === true) {
-        $(container).empty();
-      }
 
       $(container).append(tableRows);
     });
@@ -162,15 +164,22 @@ $('#saveBtn').click(function() {
 
 
 // toggle trigger on
-$('body').on('click', '.trigger-off', function(e) {
-  e.preventDefault();
-  // TODO:
-});
+$('body').on('click', '.trigger-off, .trigger-on', function(e) {
+  var self = this;
+  var triggerId = $(self).prop('id');
+  var action = $(self).find('i').hasClass('fa-toggle-off') === true ? 'enable' : 'disable';
+  var apiUrl = '/api/trigger/' + triggerId + '/' + action;
 
-// toggle trigger off
-$('body').on('click', '.trigger-on', function(e) {
   e.preventDefault();
-  // TODO:
+  $(self).find('i').toggleClass('fa-toggle-on fa-toggle-off');
+  $.ajax({
+    url: apiUrl,
+    type: 'PUT'
+  })
+  .fail(function() {
+    $(self).notify('failed to ' + action + ' trigger!', {position: 'left bottom', className: 'error'});
+    $(self).find('i').toggleClass('fa-toggle-on fa-toggle-off');
+  });
 });
 
 $('#cancelBtn').click(function(e) {
@@ -184,13 +193,11 @@ function render(clear) {
 
 render();
 
-// scroll to the end of page, load extra plans
-$(window).scroll(function() {
-  if($(window).scrollTop() + $(window).height() >= ($(document).height() - 20)) {
-    if (TestTrigger.end === false) {
-      TestTrigger.page++;
-      render();
-    }
+// scroll to the end of page, load extra triggers
+utils.infinitScroll(function() {
+  if (TestTrigger.end === false) {
+    TestTrigger.page++;
+    render();
   }
 });
 
