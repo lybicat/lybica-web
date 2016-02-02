@@ -9,7 +9,6 @@ var _ = require('lodash');
 var utils = require('./includes/utils');
 var Plan = require('./includes/plan');
 
-var defaultActions = ['task_hook', 'run_pickup'];
 
 function _formatCases(cases) {
   var casesCount = cases.reduce(function(result, c) {
@@ -58,110 +57,15 @@ var TestPlan = {
   }
 };
 
-function _generateSuitesTree(suites, checkedSuites) {
-  return _(suites)
-    .filter(function(svnPath) {
-      return svnPath !== null && svnPath !== '';
-    })
-    .reduce(function(result, svnpath) {
-      var thisResult = result;
-      var pathList = svnpath.split('/');
-
-      pathList.forEach(function(pathName) {
-        var _id = _.findIndex(thisResult, function(s) {
-          return s.text === pathName;
-        });
-
-        if (_id === -1) {
-          if (pathList.indexOf(pathName) === pathList.length - 1) {
-            var node = {text: pathName, svnpath: svnpath};
-            if (checkedSuites.indexOf(svnpath) > -1) {
-              node.state = {checked: true, expanded: true};
-            }
-            thisResult.push(node);
-          } else {
-            thisResult.push({text: pathName, nodes: []});
-          }
-          _id = thisResult.length - 1;
-        }
-
-        thisResult = thisResult[_id].nodes;
-      });
-
-      return result;
-    }, []);
-}
-
-
-function _getParents(nodes, thisArg) {
-  var parentNodes = [];
-  nodes.forEach(function(node) {
-    var parent = thisArg.treeview('getParent', node);
-    while(parent.nodeId !== undefined) {
-      parentNodes.push(parent.nodeId);
-      parent = thisArg.treeview('getParent', parent);
-    }
-  });
-
-  return _.uniq(parentNodes);
-}
-
-function _getChildren(node) {
-  if (node.nodes === undefined) return [];
-  var childrenNodes = node.nodes;
-  node.nodes.forEach(function(n) {
-    childrenNodes = childrenNodes.concat(_getChildren(n));
-  });
-
-  return childrenNodes;
-}
 
 function makePlanEditable(checkedSuites) {
   $('#planEditForm').removeClass('hidden');
   // make device type select2
-  utils.enableSelect2('#planDevices', '/api/devices', 'GET', function(result) {
-    var mappedResults = result.map(function(k) {
-      return {id: k};
-    });
-
-    return {results: mappedResults};
-  });
+  utils.enableSelect2('#planDevices', '/api/devices', 'GET');
+  // make case repo select2
+  utils.enableSelect2('#planCaseRepo', '/api/cases/repos', 'POST');
   // make actions select2
-  $('#planActions').select2();
-  // make case set as treeview
-  $('#planCaseSet').html('<h3><i class="fa fa-spinner fa-pulse"></i>loading cases...</h3>');
-  $.getJSON('/api/suites', function(suites) {
-    $('#planCaseSet').empty();
-    $('#planCaseSet').treeview({
-      data: _generateSuitesTree(suites, checkedSuites),
-      levels: 1,
-      showCheckbox: true,
-      showBorder: false,
-      showTags: false,
-      selectable: false,
-      multiSelect: true,
-      highlightSelected: false,
-      expandIcon: 'fa fa-plus-square-o',
-      collapseIcon: 'fa fa-minus-square-o',
-      checkedIcon: 'fa fa-check-square-o',
-      uncheckedIcon: 'fa fa-square-o',
-      onNodeChecked: function(event, node) {
-        var parentNodes = _getParents([node], $(this));
-        var childrenNodes = _.map(_getChildren(node), 'nodeId');
-        var allNodes = parentNodes.concat(childrenNodes);
-        $(this).treeview('checkNode', [allNodes, {silent: true}]);
-      },
-      onNodeUnchecked: function(event, node) {
-        var childrenNodes = _.map(_getChildren(node), 'nodeId');
-        $(this).treeview('uncheckNode', [childrenNodes, {silent: true}]);
-        // TODO: uncheck one node, uncheck all its children nodes, if it's the last checked node of parent nodes, uncheck them
-      },
-    });
-    // check and expand all parent nodes
-    var parentNodes = _getParents($('#planCaseSet').treeview('getChecked'), $('#planCaseSet'));
-    $('#planCaseSet').treeview('checkNode', [parentNodes, {silent: true}]);
-    $('#planCaseSet').treeview('expandNode', [parentNodes, {silent: true}]);
-  });
+  utils.enableSelect2('#planActions', '/api/actions', 'GET');
 }
 
 // new plan
@@ -170,7 +74,7 @@ $('#newPlanBtn').click(function() {
   $('#planName').val('');
   $('#planCaseSet').val('');
   $('#planDevices').val([]);
-  $('#planActions').val(defaultActions);
+  $('#planActions').val([]);
   $('#delBtn').addClass('hidden');
   makePlanEditable([]);
 });
@@ -193,21 +97,10 @@ $('#saveBtn').click(function() {
   var planName = $('#planName').val().trim();
   var planDevices = $('#planDevices').val() || [];
   var planActions = $('#planActions').val() || [];
-  var _checkedCases = $('#planCaseSet').treeview('getChecked')
-    .filter(function(c) {
-      return c.svnpath !== undefined;
-    })
-    .map(function(c) {
-      return c.svnpath;
-    });
+  var planCaseRepo = $('#planCaseRepo').val();
+  var planCaseExpr = $('#planCaseExpr').val().trim();
 
-  if (_checkedCases.length === 0) {
-    $('#planCaseSet').focus();
-    $('#planCaseSet').notify('at least one suite should be selected', 'error');
-    return;
-  }
-
-  var planCases = [{repo: 'LTETEST', expr: _checkedCases}];
+  var planCases = [{repo: planCaseRepo, expr: planCaseExpr}];
 
   isValidPlanName(planId, planName, function(isValid) {
     if (isValid === false) {

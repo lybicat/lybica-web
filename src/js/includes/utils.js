@@ -30,6 +30,15 @@ module.exports.postJSON = function(url, data, callback, errCallback) {
 };
 
 module.exports.enableSelect2 = function(container, reqUrl, reqType, resultFunc) {
+  if (resultFunc === undefined) {
+    resultFunc = function(result) {
+      var mappedResults = result.map(function(k) {
+        return {id: k};
+      });
+
+      return {results: mappedResults};
+    }
+  }
   $(container).select2({
     width: 'resolve',
     ajax: {

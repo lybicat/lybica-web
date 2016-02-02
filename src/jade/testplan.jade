@@ -31,11 +31,10 @@ block content
       form.form-horizontal
         +input("planId", "Id", "hidden", "Unified Plan ID")
         +input("planName", "Name", "text", "Unified Plan Name")
-        .form-group
-          label(class="col-sm-2 control-label") Case Set
-          .col-sm-10#planCaseSet
-        +multipleselect("planDevices", "Device Type", [])
-        +multipleselect("planActions", "Actions", ["task_hook", "run_pickup"])
+        +select("planCaseRepo", "Case Repo", [])
+        +textarea("planCaseExpr", "Filter Expression", "Case filter expression here...")
+        +multipleselect("planResources", "Resources", [])
+        +multipleselect("planActions", "Actions", [])
         +buttons([{id: "saveBtn", text: "Save", type: "button", class: "btn-default"},
           {id: "cancelBtn", text: "Cancel", type: "reset", class: "btn-default"},
           {id: "delBtn", text: "Delete", type: "button", class: "btn-danger hidden"}])
@@ -45,4 +44,3 @@ block content
 block script
   script(src="js/testplan.js")
   script(src="js/notify.min.js")
-  script(src="js/bootstrap-treeview.min.js")
