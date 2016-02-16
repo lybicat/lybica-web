@@ -11,18 +11,9 @@ var Plan = require('./includes/plan');
 
 
 function _formatCases(cases) {
-  var casesCount = cases.reduce(function(result, c) {
-    return result + (typeof(c.expr) === 'object' ? c.expr.length : 1);
-  }, 0);
-
-  if (casesCount === 0) return 'N/A';
-
-  var casesExpr = cases[0].expr;
-
-  if (typeof(casesExpr) === 'object') casesExpr = casesExpr[0];
-  if (casesCount > 1) casesExpr += '...';
-
-  return casesExpr + '<span class="badge">' + casesCount + '</span>';
+  return cases.map(function(c) {
+    return c.repo.bold() + ': ' + c.expr;
+  }).join('<br>');
 }
 
 var TestPlan = {
@@ -61,11 +52,13 @@ var TestPlan = {
 function makePlanEditable(checkedSuites) {
   $('#planEditForm').removeClass('hidden');
   // make device type select2
-  utils.enableSelect2('#planDevices', '/api/devices', 'GET');
+  utils.enableSelect2('#planResources', '/api/devices', 'GET');
   // make case repo select2
   utils.enableSelect2('#planCaseRepo', '/api/cases/repos', 'POST');
   // make actions select2
   utils.enableSelect2('#planActions', '/api/actions', 'GET');
+  // make triggers select2
+  utils.enableSelect2('#planTriggers', '/api/triggers', 'GET');
 }
 
 // new plan
@@ -73,8 +66,9 @@ $('#newPlanBtn').click(function() {
   $('#planId').val('');
   $('#planName').val('');
   $('#planCaseSet').val('');
-  $('#planDevices').val([]);
+  $('#planResources').val([]);
   $('#planActions').val([]);
+  $('#planTriggers').val([]);
   $('#delBtn').addClass('hidden');
   makePlanEditable([]);
 });
@@ -95,8 +89,9 @@ function isValidPlanName(planId, planName, callback) {
 $('#saveBtn').click(function() {
   var planId = $('#planId').val();
   var planName = $('#planName').val().trim();
-  var planDevices = $('#planDevices').val() || [];
+  var planResources = $('#planResources').val() || [];
   var planActions = $('#planActions').val() || [];
+  var planTriggers = $('#planTriggers').val() || [];
   var planCaseRepo = $('#planCaseRepo').val();
   var planCaseExpr = $('#planCaseExpr').val().trim();
 
@@ -111,8 +106,9 @@ $('#saveBtn').click(function() {
 
     var data = {
       name: planName,
-      devices: planDevices,
+      devices: planResources,
       actions: planActions,
+      triggers: planTriggers,
       cases: planCases
     };
 
@@ -142,12 +138,13 @@ $('body').on('click', '.plan-edit', function(e) {
     $('#planId').val(plan._id);
     $('#planName').val(plan.name);
     // set plan device type value
-    $('#planDevices').empty();
+    $('#planResources').empty();
     plan.devices.forEach(function(d) {
-      $('#planDevices').append('<option value="' + d + '" selected="selected"></option>');
+      $('#planResources').append('<option value="' + d + '" selected="selected"></option>');
     });
-    $('#planDevices').trigger('change');
+    $('#planResources').trigger('change');
     $('#planActions').val(plan.actions);
+    $('#planTriggers').val(plan.triggers);
     var checkedSuites = _(plan.cases).map('expr').flatten().value();
     makePlanEditable(checkedSuites);
     $('#delBtn').removeClass('hidden');

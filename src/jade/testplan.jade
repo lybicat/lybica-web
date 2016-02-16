@@ -1,4 +1,5 @@
 extends ./layout.jade
+
 include ./includes/searchinput.jade
 include ./includes/table.jade
 include ./includes/form.jade
@@ -12,10 +13,10 @@ block css
 
 block sidebar
   li
-    h3 Continuous Integration
-    p Continuous integration (CI) is the practice, in software engineering, of merging all developer working copies to a shared mainline several times a day. It was first named and proposed by Grady Booch in his 1991 method,[1] although Booch did not advocate integrating several times a day. It was adopted as part of extreme programming (XP), which did advocate integrating more than once per day, perhaps as many as tens of times per day.
-      a(href="https://en.wikipedia.org/wiki/Continuous_integration", target="_blank")
-        i.fa(class="fa-external-link")
+    h4 My Plans
+    a plan-a
+    a plan-b
+    a plan-c
 
 block content
   .row
@@ -32,9 +33,10 @@ block content
         +input("planId", "Id", "hidden", "Unified Plan ID")
         +input("planName", "Name", "text", "Unified Plan Name")
         +select("planCaseRepo", "Case Repo", [])
-        +textarea("planCaseExpr", "Filter Expression", "Case filter expression here...")
+        +textarea("planCaseExpr", "Case Expression", 3, "Case filter expression here...")
         +multipleselect("planResources", "Resources", [])
         +multipleselect("planActions", "Actions", [])
+        +multipleselect("planTriggers", "Triggers", [])
         +buttons([{id: "saveBtn", text: "Save", type: "button", class: "btn-default"},
           {id: "cancelBtn", text: "Cancel", type: "reset", class: "btn-default"},
           {id: "delBtn", text: "Delete", type: "button", class: "btn-danger hidden"}])
