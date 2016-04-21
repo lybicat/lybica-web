@@ -2,5 +2,5 @@
   "modules": [
     "font-awesome"
   ],
-  "dest": "dist"
+  "dest": "."
 }

@@ -13,4 +13,5 @@ node_modules
 .project
 .settings
 .tags
-.pydevproject
+bundle.js
+fonts
