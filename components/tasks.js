@@ -4,7 +4,7 @@ import { Layout, Fixed, Flex } from 'react-layout-pane'
 
 export default React.createClass({
   getInitialState: function() {
-    return {};
+    return {page: 1, limit: 20};
   },
   render: function() {
     return (
