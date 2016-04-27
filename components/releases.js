@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 
 export default React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return {};
   },
-  render: function() {
+  render() {
     return (
       <div className="release">
         <h1>Release</h1>

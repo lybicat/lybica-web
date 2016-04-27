@@ -1,10 +1,10 @@
 import React from 'react';
 
 export default React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return {};
   },
-  render: function() {
+  render() {
     return (
       <div className="trigger">
         <h1>Trigger</h1>

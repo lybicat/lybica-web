@@ -22,6 +22,7 @@
     "react-dom": "^15.0.1",
     "react-fontawesome": "^1.0.0",
     "react-layout-pane": "^0.1.16",
+    "react-loading": "0.0.9",
     "react-redux": "^4.4.5",
     "react-router": "^2.2.4",
     "redux": "^3.5.2",

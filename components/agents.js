@@ -1,10 +1,10 @@
 import React from 'react';
 
 export default React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return {};
   },
-  render: function() {
+  render() {
     return (
       <div className="agent">
         <h1>Agent</h1>

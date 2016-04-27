@@ -3,10 +3,10 @@ import { Link } from 'react-router'
 import { Layout, Fixed, Flex } from 'react-layout-pane'
 
 export default React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return {page: 1, limit: 20};
   },
-  render: function() {
+  render() {
     return (
       <Layout type="row">
         <Fixed className="sidebar">
