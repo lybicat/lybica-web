@@ -28,20 +28,22 @@ export default React.createClass({
 
   render() {
     return (
-      <Layout type="row">
-        <Fixed className="sidebar">
-          <SearchInput placeholder="Plan Name, author..."/>
-          {this.state.loaded === false
-            ? <Loading type="bars" color='#e3e3e3'/>
-            : <ul>
-                {this.state.plans.map(function(p) {
-                  return <li><Link activeClassName="activeItem" to={`/plans/${p._id}`}>{p.name}</Link></li>
-                })}
-              </ul>
-          }
-        </Fixed>
-        <Flex className="content">{this.props.children}</Flex>
-      </Layout>
+      <Flex>
+        <Layout type="row">
+          <Fixed className="sidebar">
+            <SearchInput placeholder="Plan Name, author..."/>
+            {this.state.loaded === false
+              ? <Loading type="bars" color='#e3e3e3'/>
+              : <ul>
+                  {this.state.plans.map(function(p) {
+                    return <li key={p._id}><Link activeClassName="activeItem" to={`/plans/${p._id}`}>{p.name}</Link></li>
+                  })}
+                </ul>
+            }
+          </Fixed>
+          <Flex className="content">{this.props.children}</Flex>
+        </Layout>
+      </Flex>
     );
   }
 });

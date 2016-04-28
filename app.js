@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { browserHistory, Router, Route, IndexRoute, Link } from 'react-router'
-import { Layout, Fixed, Flex } from 'react-layout-pane'
+import { browserHistory, Router, Route, IndexRoute } from 'react-router'
+import { Layout } from 'react-layout-pane'
 import Icon from 'react-fontawesome'
 
+import NavBar from './components/NavBar'
 import Dashboard from './components/dashboard'
 import Login from './components/login'
 import Tasks from './components/tasks'
@@ -19,19 +20,8 @@ class App extends Component{
   render() {
     return (
       <Layout type="column">
-        <Fixed className="navbar">
-          <ul>
-            <li><Link activeClassName="activeMenu" to="/" onlyActiveOnIndex={true}><Icon name="home"/>Home</Link></li>
-            <li><Link activeClassName="activeMenu" to="/tasks"><Icon name="tasks"/>Tasks</Link></li>
-            <li><Link activeClassName="activeMenu" to="/plans"><Icon name="book"/>Plans</Link></li>
-            <li><Link activeClassName="activeMenu" to="/schedules"><Icon name="book"/>Schedules</Link></li>
-            <li><Link activeClassName="activeMenu" to="/triggers"><Icon name="bolt"/>Triggers</Link></li>
-            <li><Link activeClassName="activeMenu" to="/releases"><Icon name="diamond"/>Releases</Link></li>
-            <li><Link activeClassName="activeMenu" to="/agents"><Icon name="desktop"/>Agents</Link></li>
-          </ul>
-          <Login />
-        </Fixed>
-        <Flex>{this.props.children}</Flex>
+        <NavBar />
+        {this.props.children}
       </Layout>
     );
   }

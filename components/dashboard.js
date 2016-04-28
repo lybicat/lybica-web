@@ -1,15 +1,13 @@
 import React from 'react';
+import { Flex } from 'react-layout-pane'
 
 export default React.createClass({
-  getInitialState() {
-    return {};
-  },
   render() {
     return (
-      <div className="dashboard">
+      <Flex style={{}}>
         <h1>Dashboard</h1>
         This is a dashboard!
-      </div>
+      </Flex>
     );
   }
 });
