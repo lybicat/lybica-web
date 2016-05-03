@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import { Fixed } from 'react-layout-pane'
 import Icon from 'react-fontawesome'
-import Login from './login'
+import LoginForm from './LoginForm'
 
 const MenuItem = React.createClass({
   render() {
@@ -18,27 +18,19 @@ const MenuItem = React.createClass({
 });
 
 
-const menus = [
-  {name: "Home", icon: "home", url: "/", onlyActiveOnIndex: true},
-  {name: "Tasks", icon: "tasks", url: "/tasks"},
-  {name: "Plans", icon: "book", url: "/plans"},
-  {name: "Schedules", icon: "calendar", url: "/schedules"},
-  {name: "Triggers", icon: "bolt", url: "/triggers"},
-  {name: "Releases", icon: "diamond", url: "/releases"},
-  {name: "Agents", icon: "desktop", url: "/agents"},
-].map((item)=><MenuItem
-  name={item.name}
-  icon={item.icon}
-  url={item.url}
-  onlyActiveOnIndex={item.onlyActiveOnIndex}/>);
-
-
 export default React.createClass({
+  propTypes: {
+    menus: React.PropTypes.array.isRequired
+  },
   render() {
     return (
       <Fixed className="navbar">
-        <ul>{menus}</ul>
-        <Login />
+        <ul>{this.props.menus.map((item)=><MenuItem
+  name={item.name}
+  icon={item.icon}
+  url={item.url}
+  onlyActiveOnIndex={item.onlyActiveOnIndex}/>)}</ul>
+        <LoginForm />
       </Fixed>
     );
   }

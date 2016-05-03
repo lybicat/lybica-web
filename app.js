@@ -14,11 +14,23 @@ import TriggerPage from './components/TriggerPage'
 import ReleasePage from './components/ReleasePage'
 import AgentPage from './components/AgentPage'
 
+
+const menus = [
+  {name: "Home", icon: "home", url: "/", onlyActiveOnIndex: true},
+  {name: "Tasks", icon: "tasks", url: "/tasks"},
+  {name: "Plans", icon: "book", url: "/plans"},
+  {name: "Schedules", icon: "calendar", url: "/schedules"},
+  {name: "Triggers", icon: "bolt", url: "/triggers"},
+  {name: "Releases", icon: "diamond", url: "/releases"},
+  {name: "Agents", icon: "desktop", url: "/agents"},
+];
+
+
 class App extends Component{
   render() {
     return (
       <Layout type="column">
-        <NavBar />
+        <NavBar menus={menus}/>
         <Flex>
           {this.props.children}
         </Flex>
@@ -39,9 +51,9 @@ render((
         <Route path="/plans/:planId" component={PlanDetail}/>
       </Route>
       <Route path="/schedules" component={SchedulePage}/>
-      <Route path="/triggers" component={Triggers}/>
-      <Route path="/releases" component={Releases}/>
-      <Route path="/agents" component={Agents}/>
+      <Route path="/triggers" component={TriggerPage}/>
+      <Route path="/releases" component={ReleasePage}/>
+      <Route path="/agents" component={AgentPage}/>
     </Route>
   </Router>
 ), document.getElementById('bodyWrapper'));
