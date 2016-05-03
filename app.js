@@ -9,10 +9,10 @@ import TaskPage from './components/TaskPage'
 import TaskDetail from './components/TaskPage/TaskDetail'
 import PlanPage from './components/PlanPage'
 import PlanDetail from './components/PlanPage/PlanDetail'
-import Schedules from './components/schedules'
-import Triggers from './components/triggers'
-import Releases from './components/releases'
-import Agents from './components/agents'
+import SchedulePage from './components/SchedulePage'
+import TriggerPage from './components/TriggerPage'
+import ReleasePage from './components/ReleasePage'
+import AgentPage from './components/AgentPage'
 
 class App extends Component{
   render() {
@@ -38,7 +38,7 @@ render((
       <Route path="/plans" component={PlanPage}>
         <Route path="/plans/:planId" component={PlanDetail}/>
       </Route>
-      <Route path="/schedules" component={Schedules}/>
+      <Route path="/schedules" component={SchedulePage}/>
       <Route path="/triggers" component={Triggers}/>
       <Route path="/releases" component={Releases}/>
       <Route path="/agents" component={Agents}/>
