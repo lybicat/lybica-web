@@ -2,13 +2,11 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { browserHistory, Router, Route, IndexRoute } from 'react-router'
 import { Layout, Flex } from 'react-layout-pane'
-import Icon from 'react-fontawesome'
 
 import NavBar from './components/NavBar'
-import Dashboard from './components/dashboard'
-import Login from './components/login'
-import Tasks from './components/tasks'
-import Task from './components/task'
+import DashboardPage from './components/DashboardPage'
+import TaskPage from './components/TaskPage'
+import TaskDetail from './components/TaskPage/TaskDetail'
 import PlanPage from './components/PlanPage'
 import PlanDetail from './components/PlanPage/PlanDetail'
 import Schedules from './components/schedules'
@@ -33,9 +31,9 @@ class App extends Component{
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={Dashboard}/>
-      <Route path="/tasks" component={Tasks}>
-        <Route path="/tasks/:taskId" component={Task}/>
+      <IndexRoute component={DashboardPage}/>
+      <Route path="/tasks" component={TaskPage}>
+        <Route path="/tasks/:taskId" component={TaskDetail}/>
       </Route>
       <Route path="/plans" component={PlanPage}>
         <Route path="/plans/:planId" component={PlanDetail}/>

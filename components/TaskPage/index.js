@@ -1,3 +1,4 @@
+// TODO: use mixin for sidebar/content mode
 import React from 'react';
 import { Link } from 'react-router'
 import { Layout, Fixed, Flex } from 'react-layout-pane'
