@@ -1,12 +1,14 @@
 import React from 'react';
 
+const styles = {
+  textAlign: 'right',
+  paddingRight: '1em'
+}
+
 export default React.createClass({
-  getInitialState() {
-    return {};
-  },
   render() {
     return (
-      <div className="login">
+      <div style={styles}>
         Zhang Yu
       </div>
     );

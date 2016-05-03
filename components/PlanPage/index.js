@@ -6,6 +6,18 @@ import Loading from 'react-loading'
 import SearchForm from '../SearchForm'
 
 
+// TODO: remove the duplication via mixin
+const styles = {
+  sidebar: {
+    padding: '1em',
+    borderRight: '1px solid lightgrey',
+    width: '40%'
+  },
+  content: {
+    padding: '1em'
+  }
+}
+
 export default React.createClass({
   getInitialState() {
     return {page: 1, limit: 20, plans: [], loaded: false};
@@ -29,7 +41,7 @@ export default React.createClass({
   render() {
     return (
       <Layout type="row">
-        <Fixed className="sidebar">
+        <Fixed style={styles.sidebar}>
           <SearchForm placeholder="Plan Name, author..."/>
           {this.state.loaded === false
             ? <Loading type="bars" color='#e3e3e3'/>
@@ -43,7 +55,7 @@ export default React.createClass({
               </ul>
           }
         </Fixed>
-        <Flex className="content">{this.props.children}</Flex>
+        <Flex style={styles.content}>{this.props.children}</Flex>
       </Layout>
     );
   }

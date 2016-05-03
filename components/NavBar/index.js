@@ -4,11 +4,17 @@ import { Fixed } from 'react-layout-pane'
 import Icon from 'react-fontawesome'
 import LoginForm from './LoginForm'
 
+const styles = {
+  activeMenu: {
+    backgroundColor: 'lightgrey'
+  }
+}
+
 const MenuItem = React.createClass({
   render() {
     return (
       <li>
-        <Link activeClassName="activeMenu" to={this.props.url} onlyActiveOnIndex={this.props.onlyActiveOnIndex}>
+        <Link activeStyle={styles.activeMenu} to={this.props.url} onlyActiveOnIndex={this.props.onlyActiveOnIndex}>
           <Icon name={this.props.icon}/>
           {this.props.name}
         </Link>
