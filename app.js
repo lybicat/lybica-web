@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { browserHistory, Router, Route, IndexRoute } from 'react-router'
-import { Layout } from 'react-layout-pane'
+import { Layout, Flex } from 'react-layout-pane'
 import Icon from 'react-fontawesome'
 
 import NavBar from './components/NavBar'
@@ -9,8 +9,8 @@ import Dashboard from './components/dashboard'
 import Login from './components/login'
 import Tasks from './components/tasks'
 import Task from './components/task'
-import Plans from './components/plans'
-import Plan from './components/plan'
+import PlanPage from './components/PlanPage'
+import PlanDetail from './components/PlanPage/PlanDetail'
 import Schedules from './components/schedules'
 import Triggers from './components/triggers'
 import Releases from './components/releases'
@@ -21,7 +21,9 @@ class App extends Component{
     return (
       <Layout type="column">
         <NavBar />
-        {this.props.children}
+        <Flex>
+          {this.props.children}
+        </Flex>
       </Layout>
     );
   }
@@ -35,8 +37,8 @@ render((
       <Route path="/tasks" component={Tasks}>
         <Route path="/tasks/:taskId" component={Task}/>
       </Route>
-      <Route path="/plans" component={Plans}>
-        <Route path="/plans/:planId" component={Plan}/>
+      <Route path="/plans" component={PlanPage}>
+        <Route path="/plans/:planId" component={PlanDetail}/>
       </Route>
       <Route path="/schedules" component={Schedules}/>
       <Route path="/triggers" component={Triggers}/>

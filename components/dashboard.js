@@ -1,13 +1,12 @@
 import React from 'react';
-import { Flex } from 'react-layout-pane'
 
 export default React.createClass({
   render() {
     return (
-      <Flex style={{}}>
+      <div style={{}}>
         <h1>Dashboard</h1>
         This is a dashboard!
-      </Flex>
+      </div>
     );
   }
 });
